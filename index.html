@@ -12,11 +12,23 @@
   </header>
 
   <main class="content">
+    <aside class="popup">
+      <div class="popup__container">
+        <p class="popup__title">Редактировать профиль</p>
+        <form class="popup__form">
+          <input type="text" class="popup__input-name">
+          <input type="text" class="popup__input-brief">
+          <button type="button" class="popup__save-button">Сохранить</button>
+        </form>
+        <button type="button" class="popup__close-button"></button>
+      </div>
+    </aside>
+
     <section class="profile">
       <img src="images/image.jpg" class="profile__avatar">
       <div class="profile__info">
-        <p class="profile__name">Жак-Ив Кусто</p>
-        <p class="profile__brief">Исследжователь окена</p>
+        <h1 class="profile__name">Жак-Ив Кусто</h1>
+        <p class="profile__brief">Исследователь океана</p>
         <button type="button" class="edit-button button-rectangle"></button>
       </div>
       <button type="button" class="add-button button-rectangle"><img src=""></button>
@@ -76,6 +88,6 @@
   <footer class="footer">
     <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
   </footer>
-
+  <script src="scripts/script.js"></script>
 </body>
 </html>

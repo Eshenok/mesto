@@ -4,5 +4,14 @@
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
-  line-height: 1.22;
+  line-height: 22px;
+  width: 100%;
+}
+
+@media screen and (max-width: 768px){
+  .profile__brief {
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+  }
 }

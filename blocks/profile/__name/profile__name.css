@@ -8,3 +8,10 @@
   order: -2;
   align-self: baseline;
 }
+
+@media screen and (max-width: 768px){
+  .profile__name {
+    font-size: 27px;
+    line-height: 33px;
+  }
+}

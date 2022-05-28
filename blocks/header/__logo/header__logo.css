@@ -1,5 +1,7 @@
-.header__logo {
-  margin: 0 19px;
+@media screen and (max-width: 900px){
+  .header__logo {
+    margin-left: 19px;
+  }
 }
 
 @media screen and (max-width: 768px) {

@@ -2,7 +2,7 @@
   width: 22px;
   height: 19px;
   background-color: #fff;
-  background-image: url('../images/like.svg');
+  background-image: url('../../../images/like.svg');
   background-repeat: no-repeat;
   background-position: 50% 50%;
   border: none;
@@ -13,6 +13,6 @@
 }
 
 .photo-grid__button:active {
-  background-image: url('../images/like__active.svg');
+  background-image: url('../../../images/like__active.svg');
   opacity: 1;
 }
