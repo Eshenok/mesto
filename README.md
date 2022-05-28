@@ -1,17 +1,17 @@
-# Проект: Место
-
-### Обзор
-
-* Figma
-* Картинки
-
-**Figma**
-
-* [Ссылка на макет в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
-
-**Картинки**
-
-Доставать картинки предстоит из Фигмы. Это расхожая практика, поэтому полезно потренироваться.
-Не забудьте [оптимизировать картинки](https://tinypng.com/), чтобы ваш сайт загружался быстрее.
-
-Удачи!
+# Mesto    
+  
+lending page 'Mesto' - the third project of a full-fledged, adaptive, interactive site.  
+The site is designed to demonstrate layout and programming skills.  
+'Mesto' - an interactive page where you can add photos, delete them and like them.  
+## Technologies used in the project  
+* html5 
+* css3  
+* adaptive layout  
+* JavaScript  
+## Possible improvements 
+* Ability to add pictures  
+* Possibility to like  
+* Ability to delete pictures  
+* Ability to change profile photo  
+  
+## link: https://eshenok.github.io/mesto/
