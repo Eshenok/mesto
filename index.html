@@ -3,6 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Третья практическая работа в Яндекс.Приктикум 'Место Россия'">
+	<meta name="keywords" content="Яндекс.Практикум, Место, Жак-Ив Кусто">
+	<meta name="author" content="Александр Волошин">
   <link rel="stylesheet" type="text/css" href="pages/index.css">
   <title>Mesto</title>
 </head>
@@ -12,77 +15,77 @@
   </header>
 
   <main class="content">
-    <aside class="popup">
-      <div class="popup__container">
-        <p class="popup__title">Редактировать профиль</p>
-        <form class="popup__form">
-          <input type="text" class="popup__input-name">
-          <input type="text" class="popup__input-brief">
-          <button type="button" class="popup__save-button">Сохранить</button>
-        </form>
-        <button type="button" class="popup__close-button"></button>
-      </div>
-    </aside>
-
     <section class="profile">
       <img src="images/image.jpg" class="profile__avatar" alt="Фото профиля">
       <div class="profile__info">
         <h1 class="profile__name">Жак-Ив Кусто</h1>
-        <p class="profile__brief">Исследователь океана</p>
-        <button type="button" class="edit-button button-rectangle"></button>
+        <p class="profile__occupation">Исследователь океана</p>
+        <button type="button" class="button button_theme_outline button_icon_edit"></button>
       </div>
-      <button type="button" class="add-button button-rectangle"></button>
+      <button type="button" class="button button_theme_outline button_icon_add"></button>
     </section>
 
     <section class="photo-grid">
-      <figure class="photo-grid__item">
+      <article class="photo-grid__item">
         <img src="images/kirill-pershin_karachaevo.jpg" class="photo-grid__image" alt="Карачаево-Черкесия">
-        <figcaption class="photo-grid__footer">
-          <p class="photo-grid__caption">Карачаевск</p>
-          <button type="button" class="photo-grid__button"></button>
-        </figcaption>
-      </figure>
+        <div class="photo-grid__footer">
+          <h2 class="photo-grid__caption">Карачаевск</h2>
+          <button type="button" class="button button_icon_like"></button>
+        </div>
+      </article>
 
-      <figure class="photo-grid__item">
+      <article class="photo-grid__item">
         <img src="images/kirill-pershin_elbrus.jpg" class="photo-grid__image" alt="Эльбрус">
-        <figcaption class="photo-grid__footer">
-          <p class="photo-grid__caption">Гора Эльбрус</p>
-          <button type="button" class="photo-grid__button"></button>
-        </figcaption>
-      </figure>
+        <div class="photo-grid__footer">
+          <h2 class="photo-grid__caption">Гора Эльбрус</h2>
+          <button type="button" class="button button_icon_like"></button>
+        </div>
+      </article>
 
-      <figure class="photo-grid__item">
+      <article class="photo-grid__item">
         <img src="images/kirill-pershin_dombai.jpg" class="photo-grid__image" alt="Домбай">
-        <figcaption class="photo-grid__footer">
-          <p class="photo-grid__caption">Домбай</p>
-          <button type="button" class="photo-grid__button"></button>
-        </figcaption>
-      </figure>
+        <div class="photo-grid__footer">
+          <h2 class="photo-grid__caption">Домбай</h2>
+          <button type="button" class="button button_icon_like"></button>
+        </div>
+      </article>
 
-      <figure class="photo-grid__item">
+      <article class="photo-grid__item">
         <img src="images/kirill-pershin_elbrus.jpg" class="photo-grid__image" alt="Эльбрус">
-        <figcaption class="photo-grid__footer">
-          <p class="photo-grid__caption">Гора Эльбрус</p>
-          <button type="button" class="photo-grid__button"></button>
-        </figcaption>
-      </figure>
+        <div class="photo-grid__footer">
+          <h2 class="photo-grid__caption">Гора Эльбрус</h2>
+          <button type="button" class="button button_icon_like"></button>
+        </div>
+      </article>
 
-      <figure class="photo-grid__item">
+      <article class="photo-grid__item">
         <img src="images/kirill-pershin_dombai.jpg" class="photo-grid__image" alt="Домбай">
-        <figcaption class="photo-grid__footer">
-          <p class="photo-grid__caption">Домбай</p>
-          <button type="button" class="photo-grid__button"></button>
-        </figcaption>
-      </figure>
+        <div class="photo-grid__footer">
+          <h2 class="photo-grid__caption">Домбай</h2>
+          <button type="button" class="button button_icon_like"></button>
+        </div>
+      </article>
 
-      <figure class="photo-grid__item">
+      <article class="photo-grid__item">
         <img src="images/kirill-pershin_karachaevo.jpg" class="photo-grid__image" alt="Карачаево-Черкесия">
-        <figcaption class="photo-grid__footer">
-          <p class="photo-grid__caption">Карачаево-Черкесия</p>
-          <button type="button" class="photo-grid__button"></button>
-        </figcaption>
-      </figure>
+        <div class="photo-grid__footer">
+          <h2 class="photo-grid__caption">Карачаево-Черкесия</h2>
+          <button type="button" class="button button_icon_like"></button>
+        </div>
+      </article>
     </section>
+
+    <div class="popup">
+      <div class="popup__container">
+        <p class="popup__title">Редактировать профиль</p>
+        <form class="popup__form" name="popup__form">
+          <input type="text" class="popup__input popup__input_type_name" name="popup__input_type_name" required placeholder="Введите имя">
+          <input type="text" class="popup__input popup__input_type_occupation" name="popup__input_type_occupation" required placeholder="Введите род деятельности">
+          <button type="submit" class="button button_theme_dark">Сохранить</button>
+        </form>
+        <button type="button" class="button button_icon_close"></button>
+      </div>
+    </div>
   </main>
 
   <footer class="footer">
