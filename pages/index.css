@@ -23,7 +23,7 @@
 @import url(../blocks/popup/__input/popup__input.css);
 @import url(../blocks/popup/__input/_type/popup__input_type_name.css);
 @import url(../blocks/popup/__input/_type/popup__input_type_occupation.css);
-@import url(../blocks/popup/popup_opened.css);
+@import url(../blocks/popup/_opened/popup_opened.css);
 @import url(../blocks/button/button.css);
 @import url(../blocks/button/_theme/button_theme_outline.css);
 @import url(../blocks/button/_theme/button_theme_dark.css);
