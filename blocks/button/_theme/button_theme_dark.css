@@ -1,6 +1,7 @@
 .button_theme_dark {
   width: 100%;
   height: 50px;
+  padding: 0;
   background-color: #000;
   color: white;
   border-radius: 2px;
@@ -11,6 +12,7 @@
   line-height: 22px;
   text-align: center;
   transition: background-color linear 0.3s;
+  margin-top: 18px;
 }
 
 .button_theme_dark:hover {
@@ -21,5 +23,6 @@
 @media screen and (max-width: 768px) {
   .button_theme_dark {
     height: 46px;
+    margin-top: 15px;
   }
 }

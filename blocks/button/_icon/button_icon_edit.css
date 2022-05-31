@@ -16,5 +16,8 @@
     width: 18px;
     height: 18px;
     margin: 0;
+    position: absolute;
+    right: 0;
+    top: 8px;
   }
 }

@@ -1,18 +1,18 @@
 'use strict'
 
-let editButton = document.querySelector('.edit-button');
-let popupSaveButton = document.querySelector('.popup__save-button');
-let popupCloseButton = document.querySelector('.popup__close-button');
+let editButton = document.querySelector('.button_icon_edit');
+let popupSaveButton = document.querySelector('.button_theme_dark');
+let popupCloseButton = document.querySelector('.button_icon_close');
 let popup = document.querySelector('.popup');
 
 editButton.addEventListener('click', function() { 
     let profileName = document.querySelector('.profile__name');
-    let profileBrief = document.querySelector('.profile__brief');
-    let profileInputName = document.querySelector('.popup__input-name');
-    let profileInputBrief = document.querySelector('.popup__input-brief'); 
+    let profileOccupation = document.querySelector('.profile__occupation');
+    let popupInputName = document.querySelector('.popup__input_type_name');
+    let popupInputOccupation = document.querySelector('.popup__input_type_occupation'); 
     popup.classList.add('popup_opened'); /*вывод попапа*/
-    profileInputName.value = profileName.textContent; /*присваивание имени*/
-    profileInputBrief.value = profileBrief.textContent; /*присваивание брифа*/
+    popupInputName.value = profileName.textContent; /*присваивание имени*/
+    popupInputOccupation.value = profileOccupation.textContent; /*присваивание брифа*/
 });
 
 popupCloseButton.addEventListener('click', function() { 
@@ -21,10 +21,10 @@ popupCloseButton.addEventListener('click', function() {
 
 popupSaveButton.addEventListener('click', function() {
     let profileName = document.querySelector('.profile__name');
-    let profileBrief = document.querySelector('.profile__brief');
-    let profileInputName = document.querySelector('.popup__input-name');
-    let profileInputBrief = document.querySelector('.popup__input-brief');
-    profileName.textContent = profileInputName.value; /*Замена имени*/
-    profileBrief.textContent = profileInputBrief.value; /*Замена брифа*/
+    let profileOccupation = document.querySelector('.profile__occupation');
+    let popupInputName = document.querySelector('.popup__input_type_name');
+    let popupInputOccupation = document.querySelector('.popup__input_type_occupation');
+    profileName.textContent = popupInputName.value; /*Замена имени*/
+    profileOccupation.textContent = popupInputOccupation.value; /*Замена брифа*/
     popup.classList.remove('popup_opened');
 });
