@@ -4,10 +4,10 @@ const editButton = document.querySelector('.button_icon_edit');
 const popupCloseButton = document.querySelector('.button_icon_close');
 const popup = document.querySelector('.popup');
 const popupForm = document.querySelector('.popup__form');
-let profileName = document.querySelector('.profile__name');
-let profileOccupation = document.querySelector('.profile__occupation');
-let popupInputName = document.querySelector('.popup__input_type_name');
-let popupInputOccupation = document.querySelector('.popup__input_type_occupation'); 
+const profileName = document.querySelector('.profile__name');
+const profileOccupation = document.querySelector('.profile__occupation');
+const popupInputName = document.querySelector('.popup__input_type_name');
+const popupInputOccupation = document.querySelector('.popup__input_type_occupation'); 
 
 function closePopup() {
   popup.classList.remove('popup_opened'); /*закрыть попап*/
