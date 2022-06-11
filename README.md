@@ -9,9 +9,6 @@ The site is designed to demonstrate layout and programming skills.
 * adaptive layout  
 * JavaScript  
 ## Possible improvements 
-* Ability to add pictures  
-* Possibility to like  
-* Ability to delete pictures  
 * Ability to change profile photo  
   
 ## link: https://eshenok.github.io/mesto/
