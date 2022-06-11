@@ -1,7 +1,7 @@
 'use strict'
 
-const editPopupContainer = document.querySelector('.popup__edit-profile');
-const editPopupCloseButton = document.querySelector('.button__edit-profile_close');
+const editPopupContainer = document.querySelector('.popup-edit-profile');
+const editPopupCloseButton = document.querySelector('.button_close_popup-edit-profile');
 const editPopupProfileForm = document.querySelector('.popup__form_type_edit-profile');
 const editPopupOpenButton = document.querySelector('.button_icon_edit');
 const editPopupProfileName = document.querySelector('.profile__name');
@@ -10,14 +10,14 @@ const editPopupInputName = document.querySelector('.popup__input_type_name');
 const editPopupInputOccupation = document.querySelector('.popup__input_type_occupation'); //popup редактирования профиля
 
 
-const addPopupContainer = document.querySelector('.popup__add-content');
-const addPopupButtonClose = document.querySelector('.button__add-content_close');
+const addPopupContainer = document.querySelector('.popup-add-content');
+const addPopupButtonClose = document.querySelector('.button_close_popup-add-content');
 const addPopupOpenButton = document.querySelector('.button_icon_add');
 const addPopupImageCaption = document.querySelector('.popup__input_type_image-caption');
 const addPopupImageSrc = document.querySelector('.popup__input_type_image-src');
 const addPopupForm = document.querySelector('.popup__form_type_add-content');// popup Добавления контента
-const popupPhotoGrid = document.querySelector('.popup__photo-grid');
-const popupPhotoGridCloseButton = document.querySelector('.button__photo-grid_close');
+const popupPhotoGrid = document.querySelector('.popup-photo-grid');
+const popupPhotoGridCloseButton = document.querySelector('.button_close_popup-photo-grid');
 
 const photoGridSection = document.querySelector('.photo-grid');
 const photoGridTemplate = document.querySelector('#photo-grid__template');// template
@@ -76,8 +76,8 @@ function addPopupFormSubmitHandler (evt) {
   clonePhotoGrid.querySelector('.photo-grid__image').setAttribute('src', addPopupImageSrc.value); // src
   clonePhotoGrid.querySelector('.photo-grid__image').setAttribute('alt', addPopupImageCaption.value); // alt
   clonePhotoGrid.querySelector('.photo-grid__image').addEventListener('click', function (evt) {
-    popupPhotoGrid.querySelector('.popup__photo-grid_image').setAttribute('src', evt.target.getAttribute('src'));
-    popupPhotoGrid.querySelector('.popup__photo-grid_caption').textContent = evt.target.getAttribute('alt');
+    popupPhotoGrid.querySelector('.popup-photo-grid__image').setAttribute('src', evt.target.getAttribute('src'));
+    popupPhotoGrid.querySelector('.popup-photo-grid__caption').textContent = evt.target.getAttribute('alt');
     popupPhotoGrid.classList.add('popup_opened');
   });
   clonePhotoGrid.querySelector('.button_icon_like').addEventListener('click', function (evt) { // like
@@ -97,8 +97,8 @@ function preloadImage () {
   clonePhotoGrid.querySelector('.photo-grid__image').setAttribute('src', elem.link); //src
   clonePhotoGrid.querySelector('.photo-grid__image').setAttribute('alt', elem.name); //alt
   clonePhotoGrid.querySelector('.photo-grid__image').addEventListener('click', function (evt) {
-    popupPhotoGrid.querySelector('.popup__photo-grid_image').setAttribute('src', evt.target.getAttribute('src'));
-    popupPhotoGrid.querySelector('.popup__photo-grid_caption').textContent = evt.target.getAttribute('alt');
+    popupPhotoGrid.querySelector('.popup-photo-grid__image').setAttribute('src', evt.target.getAttribute('src'));
+    popupPhotoGrid.querySelector('.popup-photo-grid__caption').textContent = evt.target.getAttribute('alt');
     popupPhotoGrid.classList.add('popup_opened');
   });
   clonePhotoGrid.querySelector('.button_icon_like').addEventListener('click', function (evt) { // like
