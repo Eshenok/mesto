@@ -25,65 +25,37 @@
       <button type="button" class="button button_theme_outline button_icon_add"></button>
     </section>
 
-    <section class="photo-grid">
-      <article class="photo-grid__item">
-        <img src="images/kirill-pershin_karachaevo.jpg" class="photo-grid__image" alt="Карачаево-Черкесия">
-        <div class="photo-grid__footer">
-          <h2 class="photo-grid__caption">Карачаевск</h2>
-          <button type="button" class="button button_icon_like"></button>
-        </div>
-      </article>
+    <section class="photo-grid"></section>
 
-      <article class="photo-grid__item">
-        <img src="images/kirill-pershin_elbrus.jpg" class="photo-grid__image" alt="Эльбрус">
-        <div class="photo-grid__footer">
-          <h2 class="photo-grid__caption">Гора Эльбрус</h2>
-          <button type="button" class="button button_icon_like"></button>
-        </div>
-      </article>
-
-      <article class="photo-grid__item">
-        <img src="images/kirill-pershin_dombai.jpg" class="photo-grid__image" alt="Домбай">
-        <div class="photo-grid__footer">
-          <h2 class="photo-grid__caption">Домбай</h2>
-          <button type="button" class="button button_icon_like"></button>
-        </div>
-      </article>
-
-      <article class="photo-grid__item">
-        <img src="images/kirill-pershin_elbrus.jpg" class="photo-grid__image" alt="Эльбрус">
-        <div class="photo-grid__footer">
-          <h2 class="photo-grid__caption">Гора Эльбрус</h2>
-          <button type="button" class="button button_icon_like"></button>
-        </div>
-      </article>
-
-      <article class="photo-grid__item">
-        <img src="images/kirill-pershin_dombai.jpg" class="photo-grid__image" alt="Домбай">
-        <div class="photo-grid__footer">
-          <h2 class="photo-grid__caption">Домбай</h2>
-          <button type="button" class="button button_icon_like"></button>
-        </div>
-      </article>
-
-      <article class="photo-grid__item">
-        <img src="images/kirill-pershin_karachaevo.jpg" class="photo-grid__image" alt="Карачаево-Черкесия">
-        <div class="photo-grid__footer">
-          <h2 class="photo-grid__caption">Карачаево-Черкесия</h2>
-          <button type="button" class="button button_icon_like"></button>
-        </div>
-      </article>
-    </section>
-
-    <div class="popup">
+    <div class="popup popup__edit-profile">
       <div class="popup__container">
         <p class="popup__title">Редактировать профиль</p>
-        <form class="popup__form" name="popup__form">
+        <form class="popup__form popup__form_type_edit-profile" name="popup__form">
           <input type="text" class="popup__input popup__input_type_name" name="popup__input_type_name" required placeholder="Введите имя">
           <input type="text" class="popup__input popup__input_type_occupation" name="popup__input_type_occupation" required placeholder="Укажите род деятельности">
-          <button type="submit" class="button button_theme_dark">Сохранить</button>
+          <button type="submit" class="button button_theme_dark button__edit-profile_save">Сохранить</button>
         </form>
-        <button type="button" class="button button_icon_close"></button>
+        <button type="button" class="button button_icon_close button__edit-profile_close"></button>
+      </div>
+    </div>
+
+    <div class="popup popup__add-content">
+      <div class="popup__container">
+        <p class="popup__title">Новое место</p>
+        <form class="popup__form popup__form_type_add-content" name="popup__add-form">
+          <input type="text" class="popup__input popup__input_type_image-caption" name="popup__input_type_image-caption" required placeholder="Название">
+          <input type="text" class="popup__input popup__input_type_image-src" name="popup__input_type_image-src" required placeholder="Ссылка на картинку">
+          <button type="submit" class="button button_theme_dark button__add-content_create">Создать</button>
+        </form>
+        <button type="button" class="button button_icon_close button__add-content_close"></button> 
+      </div>
+    </div>
+
+    <div class="popup popup__photo-grid">
+      <div class="popup__photo-grid_container">
+        <button type="button" class="button button_icon_close button__photo-grid_close"></button>
+        <img src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg" class="popup__photo-grid_image" alt="">
+        <p class="popup__photo-grid_caption">21321321321321</p>
       </div>
     </div>
   </main>
@@ -91,6 +63,18 @@
   <footer class="footer">
     <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
   </footer>
+
+  <template id="photo-grid__template">
+    <article class="photo-grid__item">
+      <img src="" class="photo-grid__image" alt="">
+      <div class="photo-grid__footer">
+        <h2 class="photo-grid__caption"></h2>
+        <button type="button" class="button button_icon_like"></button>
+      </div>
+      <button type="button" class="button button_icon_delete"></button>
+    </article>
+  </template>
+
   <script src="scripts/script.js"></script>
 </body>
 </html>

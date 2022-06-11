@@ -1,0 +1,5 @@
+.popup__photo-grid_image {
+  max-width: 75vw;
+  max-height: 75vh;
+  background-color: transparent;
+}
