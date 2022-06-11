@@ -27,7 +27,7 @@
 
     <section class="photo-grid"></section>
 
-    <div class="popup popup-edit-profile">
+    <div class="popup popup_type_profile">
       <div class="popup__container">
         <p class="popup__title">Редактировать профиль</p>
         <form class="popup__form popup__form_type_edit-profile" name="popup__form">
@@ -35,27 +35,27 @@
           <input type="text" class="popup__input popup__input_type_occupation" name="popup__input_type_occupation" required placeholder="Укажите род деятельности">
           <button type="submit" class="button button_theme_dark button_type_save">Сохранить</button>
         </form>
-        <button type="button" class="button button_icon_close button_close_popup-edit-profile"></button>
+        <button type="button" class="button button_icon_close button_close_profile"></button>
       </div>
     </div>
 
-    <div class="popup popup-add-content">
+    <div class="popup popup_type_card">
       <div class="popup__container">
         <p class="popup__title">Новое место</p>
         <form class="popup__form popup__form_type_add-content" name="popup__add-form">
           <input type="text" class="popup__input popup__input_type_image-caption" name="popup__input_type_image-caption" required placeholder="Название">
-          <input type="text" class="popup__input popup__input_type_image-src" name="popup__input_type_image-src" required placeholder="Ссылка на картинку">
+          <input type="url" class="popup__input popup__input_type_image-src" name="popup__input_type_image-src" required placeholder="Ссылка на картинку">
           <button type="submit" class="button button_theme_dark button_type_create">Создать</button>
         </form>
-        <button type="button" class="button button_icon_close button_close_popup-add-content"></button> 
+        <button type="button" class="button button_icon_close button_close_card"></button> 
       </div>
     </div>
 
-    <div class="popup popup-photo-grid">
-      <div class="popup-photo-grid__container">
-        <button type="button" class="button button_icon_close button_close_popup-photo-grid"></button>
-        <img src="1" class="popup-photo-grid__image" alt="1">
-        <p class="popup-photo-grid__caption">1</p>
+    <div class="popup popup_type_image">
+      <div class="popup__container_type_image">
+        <button type="button" class="button button_icon_close button_close_image"></button>
+        <img src="1" class="popup__image" alt="1">
+        <p class="popup__caption">1</p>
       </div>
     </div>
   </main>
