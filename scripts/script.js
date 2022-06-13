@@ -16,6 +16,8 @@ const addPopupImageSrc = document.querySelector('.popup__input_type_image-src');
 const addPopupForm = document.querySelector('.popup__form_type_add-content');// popup Добавления контента
 const imagePopupContainer = document.querySelector('.popup_type_image');//popup картинки
 const imagePopupCloseButton = document.querySelector('.button_close_image');
+const imagePopup = imagePopupContainer.querySelector('.popup__image');// поиск картинки для popup Image
+const captionPopup = imagePopupContainer.querySelector('.popup__caption'); // поиск подписи для popup Image
 const photoGridSection = document.querySelector('.photo-grid');
 const cardTemplate = document.querySelector('#photo-grid__template');// template
 const initialCards = [
@@ -71,8 +73,6 @@ function makeCard (cardImageSource, cardCaptionSource) {
   const cardImage = card.querySelector('.photo-grid__image');
   const likeButton = card.querySelector('.button_icon_like');
   const deleteButton = card.querySelector('.button_icon_delete');
-  const imagePopup = imagePopupContainer.querySelector('.popup__image');
-  const captionPopup = imagePopupContainer.querySelector('.popup__caption');
   card.querySelector('.photo-grid__caption').textContent = cardCaptionSource; //caption
   cardImage.src = cardImageSource; // src
   cardImage.alt = cardCaptionSource; // alt
