@@ -20,6 +20,7 @@ function checkValidate(formElement, inputElement) {
   } else {
     hideErrorMessage(formElement, inputElement); //Спрятать сообщение об ошибке
   }
+  switchButtonStatus(formElement);
 }
 
 function getListener(formElement) {
@@ -27,8 +28,33 @@ function getListener(formElement) {
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
       checkValidate(formElement, inputElement); //добавим в прослушку проверку на валидность при вводе для каждого input;
-    })
+    });
   })
+}
+
+function checkValidateForm(formElement) {
+  const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
+  let inputStatus = false;
+  for(let i =0; i<inputList.length;i++) {
+    if (!inputList[i].validity.valid) {
+      inputStatus = false;
+      break;
+    } else {
+      inputStatus = true;
+    }
+  }
+  return inputStatus;
+}
+
+function switchButtonStatus(formElement) {
+  const buttonElement = formElement.querySelector('.button');
+  if (!checkValidateForm(formElement)) {
+    buttonElement.setAttribute('disabled', '');
+    buttonElement.classList.add('button_type_disabled');
+  } else {
+    buttonElement.removeAttribute('disabled');
+    buttonElement.classList.remove('button_type_disabled');
+  }
 }
 
 function enableValidate() {
@@ -36,8 +62,9 @@ function enableValidate() {
   formList.forEach((formElement) => { //обходим все формы
     formElement.addEventListener('submit', (evt) => { //добавим прослушку для форм
       evt.preventDefault();//отключили для форм Default
-    })
+    });
     getListener(formElement);//Добавляем прослушки input в формы.
+    switchButtonStatus(formElement);
   });
 }
 

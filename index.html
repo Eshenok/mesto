@@ -28,15 +28,16 @@
     <section class="photo-grid"></section>
 
     <div class="popup popup_type_profile">
+      <div class="popup__overlay"></div>
       <div class="popup__container">
         <p class="popup__title">Редактировать профиль</p>
         <form class="popup__form popup__form_type_edit-profile" name="popup__form" novalidate>
           <div class="popup__input_container">
-            <input type="text" id="popup__input_type_name" class="popup__input popup__input_type_name popup__input-error" name="popup__input_type_name" required placeholder="Введите имя">
+            <input type="text" id="popup__input_type_name" class="popup__input popup__input_type_name popup__input-error" name="popup__input_type_name" minlength="2" maxlength="40" required placeholder="Введите имя">
             <span class="popup__input-span-error popup__input_type_name-error popup__input-span-error_active">21321321</span>
           </div>
           <div class="popup__input_container">
-            <input type="text" id="popup__input_type_occupation" class="popup__input popup__input_type_occupation" name="popup__input_type_occupation" required placeholder="Укажите род деятельности">
+            <input type="text" id="popup__input_type_occupation" class="popup__input popup__input_type_occupation" name="popup__input_type_occupation" minlength="2" maxlength="200" required placeholder="Укажите род деятельности">
             <span class="popup__input-span-error popup__input_type_occupation-error">21321312</span>
           </div>
           <button type="submit" class="button button_theme_dark button_type_save">Сохранить</button>
@@ -46,11 +47,12 @@
     </div>
 
     <div class="popup popup_type_card">
+      <div class="popup__overlay"></div>
       <div class="popup__container">
         <p class="popup__title">Новое место</p>
         <form class="popup__form popup__form_type_add-content" name="popup__add-form" novalidate>
           <div class="popup__input_container">
-            <input type="text" id="popup__input_type_image-caption" class="popup__input popup__input_type_image-caption" name="popup__input_type_image-caption" required placeholder="Название">
+            <input type="text" id="popup__input_type_image-caption" class="popup__input popup__input_type_image-caption" name="popup__input_type_image-caption" minlength="2" maxlength="30" required placeholder="Название">
             <span class="popup__input-span-error popup__input_type_image-caption-error"></span>
           </div>
           <div class="popup__input_container">
@@ -64,6 +66,7 @@
     </div>
 
     <div class="popup popup_type_image">
+      <div class="popup__overlay"></div>
       <div class="popup__image-container">
         <button type="button" class="button button_icon_close button_close_image"></button>
         <img src="1" class="popup__image" alt="1">

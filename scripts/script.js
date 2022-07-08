@@ -55,9 +55,13 @@ function openPopup (popup) {
   popup.classList.add('popup_opened'); /*вывод попапа*/
 }
 
-function openPopupProfile () {
+function preloadProfileData () {
   editPopupInputName.value = editPopupProfileName.textContent; /*присваивание имени*/
   editPopupInputOccupation.value = editPopupProfileOccupation.textContent; /*присваивание брифа*/
+}
+
+function openPopupProfile () {
+  preloadProfileData();
   openPopup(editPopupContainer);
 }
 
@@ -105,11 +109,21 @@ function preloadImages () {
   });
 }
 
+function getListenerPopupOverlay () {
+  const popupList = Array.from(document.querySelectorAll('.popup')); //Нашли все попапы
+  popupList.forEach((popupElement) => {
+    const popupOverlay = popupElement.querySelector('.popup__overlay'); //Для каждого попапа нашли свой overlay
+    popupOverlay.addEventListener('click', () => closePopup(popupElement)); //добавили прослушку
+  })
+}
+
 preloadImages();
+getListenerPopupOverlay();
+preloadProfileData();
 editPopupOpenButton.addEventListener('click', openPopupProfile);
-editPopupCloseButton.addEventListener('click', () => {closePopup(editPopupContainer)});
+editPopupCloseButton.addEventListener('click', () => closePopup(editPopupContainer));
 editPopupProfileForm.addEventListener('submit', handleProfileEditSubmit);//popup редактирования профиля
-addPopupOpenButton.addEventListener('click', () => {openPopup(addPopupContainer)});
-addPopupButtonClose.addEventListener('click', () => {closePopup(addPopupContainer)});
+addPopupOpenButton.addEventListener('click', () => openPopup(addPopupContainer));
+addPopupButtonClose.addEventListener('click', () => closePopup(addPopupContainer));
 addPopupForm.addEventListener('submit', handleCardAddSubmit);//popup добавления контента
-imagePopupCloseButton.addEventListener('click', () => {closePopup(imagePopupContainer)})
+imagePopupCloseButton.addEventListener('click', () => closePopup(imagePopupContainer))
