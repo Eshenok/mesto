@@ -1,5 +1,7 @@
 'use strict'
 
+import { switchButtonStatus, config } from './validate.js';
+import { initialCards } from "./initialCard.js";
 const editPopupContainer = document.querySelector('.popup_type_profile');
 const editPopupCloseButton = document.querySelector('.button_close_profile');
 const editPopupProfileForm = document.querySelector('.popup__form_type_edit-profile');
@@ -20,32 +22,6 @@ const imagePopup = imagePopupContainer.querySelector('.popup__image');// пои�
 const captionPopup = imagePopupContainer.querySelector('.popup__caption'); // поиск подписи для popup Image
 const photoGridSection = document.querySelector('.photo-grid');
 const cardTemplate = document.querySelector('#photo-grid__template');// template
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
 
 function checkKeypressEsc (evt) {
   if (evt.key === 'Escape') {
@@ -108,10 +84,11 @@ function handleCardAddSubmit (evt) {
   photoGridSection.prepend(card); // add content in html
   closePopup(addPopupContainer);
   addPopupForm.reset();
+  switchButtonStatus(addPopupForm, config);
 }
 
-function preloadImages () {
-  initialCards.forEach(function (elem) {
+function preloadImages (cardArr) {
+  cardArr.forEach(function (elem) {
     const card = makeCard(elem.link, elem.name);
     photoGridSection.prepend(card); //add content in html
   });
@@ -125,7 +102,7 @@ function getListenerPopupOverlay () {
   })
 }
 
-preloadImages();
+preloadImages(initialCards);
 getListenerPopupOverlay();
 preloadProfileData();
 editPopupOpenButton.addEventListener('click', openPopupProfile);

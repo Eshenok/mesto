@@ -1,39 +1,48 @@
 'use strict'
 
-function showErrorMessage(formElement, inputElement, errorMessage) {
+const config = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.button',
+  inactiveButtonClass: 'button_type_disabled',
+  inputErrorClass: 'popup__input-error',
+  errorClass: 'popup__input-span-error_active',
+}
+
+function showErrorMessage(formElement, inputElement, errorMessage, config) {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);//нашли все span для вывода текста ошибки.
   errorElement.textContent = errorMessage; // Дали span'у текст ошибки
-  inputElement.classList.add('popup__input-error'); //дали border для input'a
-  errorElement.classList.add('popup__input-span-error_active'); //display: block для span
+  inputElement.classList.add(config.inputErrorClass); //дали border для input'a
+  errorElement.classList.add(config.errorClass); //display: block для span
 }
 
-function hideErrorMessage(formElement, inputElement) {
+function hideErrorMessage(formElement, inputElement, config) {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`); //Нашли span
   errorElement.textContent = ' ';
-  inputElement.classList.remove('popup__input-error'); //забрали border для input'a
-  errorElement.classList.remove('popup__input-span-error_active'); //display: none для span
+  inputElement.classList.remove(config.inputErrorClass); //забрали border для input'a
+  errorElement.classList.remove(config.errorClass); //display: none для span
 }
 
-function checkValidate(formElement, inputElement) {
+function checkValidate(formElement, inputElement, config) {
   if (!inputElement.validity.valid) {
-    showErrorMessage(formElement, inputElement, inputElement.validationMessage);//Если не прошел проверку, то покажет message
+    showErrorMessage(formElement, inputElement, inputElement.validationMessage, config);//Если не прошел проверку, то покажет message
   } else {
-    hideErrorMessage(formElement, inputElement); //Спрятать сообщение об ошибке
+    hideErrorMessage(formElement, inputElement, config); //Спрятать сообщение об ошибке
   }
-  switchButtonStatus(formElement);
+  switchButtonStatus(formElement, config);
 }
 
-function getListener(formElement) {
-  const inputList = Array.from(formElement.querySelectorAll('.popup__input'));//Нашли все input для каждой формы отдельно.
+function getListener(formElement, config) {
+  const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));//Нашли все input для каждой формы отдельно.
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
-      checkValidate(formElement, inputElement); //добавим в прослушку проверку на валидность при вводе для каждого input;
+      checkValidate(formElement, inputElement, config); //добавим в прослушку проверку на валидность при вводе для каждого input;
     });
   })
 }
 
-function checkValidateForm(formElement) {
-  const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
+function checkValidateForm(formElement, config) {
+  const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
   let inputStatus = false;
   for(let i =0; i<inputList.length;i++) {
     if (!inputList[i].validity.valid) {
@@ -46,29 +55,30 @@ function checkValidateForm(formElement) {
   return inputStatus;
 }
 
-function switchButtonStatus(formElement) {
-  const buttonElement = formElement.querySelector('.button');
-  if (!checkValidateForm(formElement)) {
+function switchButtonStatus(formElement, config) {
+  const buttonElement = formElement.querySelector(config.submitButtonSelector);
+  if (!checkValidateForm(formElement, config)) {
     buttonElement.setAttribute('disabled', '');
-    buttonElement.classList.add('button_type_disabled');
+    buttonElement.classList.add(config.inactiveButtonClass);
   } else {
     buttonElement.removeAttribute('disabled');
-    buttonElement.classList.remove('button_type_disabled');
+    buttonElement.classList.remove(config.inactiveButtonClass);
   }
 }
 
-function enableValidate() {
-  const formList = Array.from(document.querySelectorAll('.popup__form'));//Нашли все формы
+function enableValidate(config) {
+  const formList = Array.from(document.querySelectorAll(config.formSelector));//Нашли все формы
   formList.forEach((formElement) => { //обходим все формы
     formElement.addEventListener('submit', (evt) => { //добавим прослушку для форм
       evt.preventDefault();//отключили для форм Default
     });
-    getListener(formElement);//Добавляем прослушки input в формы.
-    switchButtonStatus(formElement);
+    getListener(formElement, config);//Добавляем прослушки input в формы.
+    switchButtonStatus(formElement, config);
   });
 }
 
-enableValidate();
+enableValidate(config);
 
+export { switchButtonStatus, config };
 //Корневой formElement лежит в enableValidate
 //Корневой inputElement лежит в getEventListener
