@@ -37,6 +37,7 @@ function closePopup (popup) {
 function openPopup (popup) {
   popup.classList.add('popup_opened'); /*вывод попапа*/
   document.addEventListener('keydown', checkKeypressEsc);
+  switchButtonStatus(editPopupProfileForm, config);
 }
 
 function preloadProfileData () {
