@@ -47,12 +47,20 @@ const initialCards = [
   }
 ];
 
-function closePopup(popup) {
+function checkKeypressEsc (evt) {
+  if (evt.key === 'Escape') {
+    closePopup(document.querySelector('.popup_opened')); //на странице только 1 popup_opened
+  }
+}
+
+function closePopup (popup) {
   popup.classList.remove('popup_opened'); /*закрыть попап*/
+  document.removeEventListener('keydown', checkKeypressEsc);
 }
 
 function openPopup (popup) {
   popup.classList.add('popup_opened'); /*вывод попапа*/
+  document.addEventListener('keydown', checkKeypressEsc);
 }
 
 function preloadProfileData () {
@@ -83,7 +91,7 @@ function makeCard (cardImageSource, cardCaptionSource) {
   cardImage.addEventListener('click', function () {
     imagePopup.src = cardImage.src;
     captionPopup.textContent = cardImage.alt;
-    imagePopupContainer.classList.add('popup_opened');
+    openPopup(imagePopupContainer);
   });
   likeButton.addEventListener('click', function () { // like
     likeButton.classList.toggle('button_icon_like-active');
@@ -103,7 +111,7 @@ function handleCardAddSubmit (evt) {
 }
 
 function preloadImages () {
-  initialCards.forEach(function (elem) { //for(i = 0; i < initialCards.lenghth; i++)
+  initialCards.forEach(function (elem) {
     const card = makeCard(elem.link, elem.name);
     photoGridSection.prepend(card); //add content in html
   });

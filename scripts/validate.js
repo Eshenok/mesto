@@ -9,7 +9,7 @@ function showErrorMessage(formElement, inputElement, errorMessage) {
 
 function hideErrorMessage(formElement, inputElement) {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`); //Нашли span
-  errorElement.textContent = '';
+  errorElement.textContent = ' ';
   inputElement.classList.remove('popup__input-error'); //забрали border для input'a
   errorElement.classList.remove('popup__input-span-error_active'); //display: none для span
 }
