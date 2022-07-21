@@ -43,21 +43,14 @@ function getListener(formElement, config) {
 
 function checkValidateForm(formElement, config) {
   const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
-  let inputStatus = false;
-  for(let i =0; i<inputList.length;i++) {
-    if (!inputList[i].validity.valid) {
-      inputStatus = false;
-      break;
-    } else {
-      inputStatus = true;
-    }
-  }
-  return inputStatus;
+  return inputList.some((inputElement) => {
+    return !inputElement.validity.valid
+  });
 }
 
 function switchButtonStatus(formElement, config) {
   const buttonElement = formElement.querySelector(config.submitButtonSelector);
-  if (!checkValidateForm(formElement, config)) {
+  if (checkValidateForm(formElement, config)) {
     buttonElement.setAttribute('disabled', '');
     buttonElement.classList.add(config.inactiveButtonClass);
   } else {
