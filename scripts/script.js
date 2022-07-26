@@ -1,6 +1,6 @@
 'use strict'
 
-import { switchButtonStatus, config } from './validate.js';
+import { switchButtonStatus, config } from './FormValidator.js';
 import { initialCards } from "./initialCard.js";
 const popupProfile = document.querySelector('.popup_type_profile');
 const popupProfileCloseButton = document.querySelector('.button_close_profile');
