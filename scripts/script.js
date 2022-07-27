@@ -1,7 +1,9 @@
 'use strict'
 
 import { switchButtonStatus, config } from './FormValidator.js';
-import { initialCards } from "./initialCard.js";
+import { initialCards, cardConfig } from "./initialCard.js";
+import { MakeCard } from "./card.js";
+
 const popupProfile = document.querySelector('.popup_type_profile');
 const popupProfileCloseButton = document.querySelector('.button_close_profile');
 const popupProfileForm = document.querySelector('.popup__form_type_edit-profile');
@@ -82,8 +84,8 @@ function makeCard (cardImageSource, cardCaptionSource) {
 
 function handleCardAddSubmit (evt) {
   evt.preventDefault();
-  const card = makeCard(popupCardInputImageSrc.value, popupCardInputImageCaption.value)
-  photoGridSection.prepend(card); // add content in html
+  const card = new MakeCard(popupCardInputImageCaption.value, popupCardInputImageSrc.value, cardConfig);
+  photoGridSection.prepend(card.generateCard()); // add content in html
   closePopup(popupCardContainer);
   popupCardForm.reset();
   switchButtonStatus(popupCardForm, config);
@@ -91,8 +93,8 @@ function handleCardAddSubmit (evt) {
 
 function preloadImages () {
   initialCards.forEach(function (elem) {
-    const card = makeCard(elem.link, elem.name);
-    photoGridSection.prepend(card); //add content in html
+    const card = new MakeCard(elem.name, elem.link, cardConfig);
+    photoGridSection.prepend(card.generateCard()); //add content in html
   });
 }
 
