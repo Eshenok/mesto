@@ -3,13 +3,14 @@
 import {cardConfig} from "./initialCard.js";
 
 class MakeCard {
-  constructor(imageCaption, imageSrc) {
+  constructor(imageCaption, imageSrc, templateId) {
   this._imageCaption = imageCaption;
   this._imageSrc = imageSrc;
+  this._templateId = templateId;
   }
 
   _getTemplate () {
-    const cardElement = document.querySelector(`#photo-grid__template`).content.cloneNode(true); //нашли template и скопировали его
+    const cardElement = document.querySelector(this._templateId).content.cloneNode(true); //нашли template и скопировали его
     return cardElement; //вернули для дальнейшего использования
   }
   

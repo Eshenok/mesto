@@ -10,13 +10,76 @@ const config = {
 }
 
 class formValidate {
-  constructor(config) {
-    const formConfig = config;
+  constructor(config, formElement) {
+    this._config = config;
+    this._formElement = formElement;
   }
   
+  _setEventListeners () {
+    /*this._formElement.addEventListener('submit', (evt) => { // Убрали стандартное поведение
+      evt.preventDefault();
+    });*/
+    
+    const inputList = Array.from(this._formElement.querySelectorAll(this._config.inputSelector));
+    inputList.forEach((inputElement) => {
+      inputElement.addEventListener('input', () => {
+        this._checkValidate(inputElement);
+      });
+    })
+    
+  }
+  
+  _checkValidate (inputElement) {
+    if (!inputElement.validity.valid) {
+      this._showErrorMessage(inputElement);
+    } else {
+      this._hideErrorMessage(inputElement);
+    }
+    this._switchButtonState();
+  }
+  
+  _showErrorMessage (inputElement) {
+    this._errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
+    this._errorElement.textContent = inputElement.validationMessage;
+    inputElement.classList.add(this._config.inputErrorClass);
+    this._errorElement.classList.add(this._config.errorClass);
+  }
+  
+  _hideErrorMessage (inputElement) {
+    this._errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
+    this._errorElement.textContent = ' ';
+    inputElement.classList.remove(this._config.inputErrorClass);
+    this._errorElement.classList.remove(this._config.errorClass);
+  }
+  
+  _checkValidateForm () {
+    const inputList = Array.from(this._formElement.querySelectorAll(this._config.inputSelector));
+    return inputList.some((inputElement) => {
+      return !inputElement.validity.valid
+    });
+  }
+  
+  _switchButtonState () {
+    this._buttonElement = this._formElement.querySelector(this._config.submitButtonSelector);
+    if (this._checkValidateForm()) {
+      this._buttonElement.setAttribute('disabled', '');
+      this._buttonElement.classList.add(config.inactiveButtonClass);
+    } else {
+      this._buttonElement.removeAttribute('disabled');
+      this._buttonElement.classList.remove(config.inactiveButtonClass);
+    }
+  }
+  
+  enableValidate () {
+  this._setEventListeners();
+  this._switchButtonState();
+  }
   
 }
 
+export {formValidate, config};
+
+/*
 function showErrorMessage(formElement, inputElement, errorMessage, config) {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);//нашли все span для вывода текста ошибки.
   errorElement.textContent = errorMessage; // Дали span'у текст ошибки
@@ -83,3 +146,4 @@ enableValidate(config);
 export { switchButtonStatus, config };
 //Корневой formElement лежит в enableValidate
 //Корневой inputElement лежит в getEventListener
+*/

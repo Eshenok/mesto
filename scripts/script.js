@@ -1,6 +1,6 @@
 'use strict'
 
-import { switchButtonStatus, config } from './FormValidator.js';
+import { formValidate, config } from './FormValidator.js';
 import { initialCards, cardConfig } from "./initialCard.js";
 import { MakeCard } from "./card.js";
 
@@ -21,6 +21,9 @@ const popupCardForm = document.querySelector('.popup__form_type_add-content');//
 const imagePopupContainer = document.querySelector('.popup_type_image');//popup картинки
 const imagePopupCloseButton = document.querySelector('.button_close_image');
 const photoGridSection = document.querySelector('.photo-grid');
+
+const profileForm = new formValidate(config, '.popup__form_type_edit-profile');
+profileForm.enableValidate();
 
 function checkKeypressEsc (evt) {
   if (evt.key === 'Escape') {
@@ -58,7 +61,7 @@ function handleProfileEditSubmit (evt) {
 
 function handleCardAddSubmit (evt) {
   evt.preventDefault();
-  const card = new MakeCard(popupCardInputImageCaption.value, popupCardInputImageSrc.value);
+  const card = new MakeCard(popupCardInputImageCaption.value, popupCardInputImageSrc.value, '#photo-grid__template')
   photoGridSection.prepend(card.generateCard()); // add content in html
   closePopup(popupCardContainer);
   popupCardForm.reset();
@@ -67,7 +70,7 @@ function handleCardAddSubmit (evt) {
 
 function preloadImages () {
   initialCards.forEach(function (elem) {
-    const card = new MakeCard(elem.name, elem.link);
+    const card = new MakeCard(elem.name, elem.link, '#photo-grid__template');
     photoGridSection.prepend(card.generateCard()); //add content in html
   });
 }
@@ -79,6 +82,8 @@ function getListenerPopupOverlay () {
     popupOverlay.addEventListener('click', () => closePopup(popupElement)); //добавили прослушку
   })
 }
+
+
 
 preloadImages();
 getListenerPopupOverlay();
