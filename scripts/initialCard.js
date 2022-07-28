@@ -38,6 +38,7 @@ const validateConfig = {
 
 const cardConfig = {
   buttonLikeSelector: '.button_icon_like',
+  buttonLikeActiveClass: 'button_icon_like-active',
   buttonDelSelector: '.button_icon_delete',
   buttonClosePopupSelector: '.button_close_image',
   imagePopupContainerSelector: '.popup_type_image',

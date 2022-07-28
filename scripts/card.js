@@ -1,36 +1,40 @@
 'use strict'
 
+import {cardConfig} from "./initialCard.js";
+
 class MakeCard {
-  constructor(imageCaption, imageSrc, cardConfig) {
+  constructor(imageCaption, imageSrc) {
   this._imageCaption = imageCaption;
   this._imageSrc = imageSrc;
-  this._cardConfig = cardConfig;
   }
 
   _getTemplate () {
     const cardElement = document.querySelector(`#photo-grid__template`).content.cloneNode(true); //нашли template и скопировали его
     return cardElement; //вернули для дальнейшего использования
   }
-
-  _setEventListeners (src, caption) { //function добавления прослушки
-    this._popupContainer = document.querySelector(this._cardConfig.imagePopupContainerSelector); //нашли Попап
-    this._imagePopup = this._popupContainer.querySelector(this._cardConfig.imagePopupSelector); //нашли изображение в попапе
-    this._captionPopup = this._popupContainer.querySelector(this._cardConfig.captionPopupSelector); //caption попапа
-    this._cardImage.addEventListener('click', function () { // открытие попапа по клику
-      this._imagePopup.src = src;
-      this._imagePopup.alt = caption;
-      this._captionPopup.textContent = this._imagePopup.alt;
-      openPopup(this._popupContainer);
+  
+  _handleLikeButton () {
+    this._likeButton.classList.toggle(cardConfig.buttonLikeActiveClass);
+  }
+  
+  _handleDelButton () {
+    this._delButton.closest('.photo-grid__item').remove();
+  }
+  
+  _setEventListeners () { //function добавления прослушки
+    this._likeButton.addEventListener('click', () => {
+      this._handleLikeButton();
     });
     
-    const likeButton = this._cardElement.querySelector(this._cardConfig.buttonLikeSelector);
-    likeButton.addEventListener('click', function () { // like
-      likeButton.classList.toggle('button_icon_like-active');
+    this._delButton.addEventListener('click', () => { // удаление карточки
+      this._handleDelButton();
     });
-    
-    const delButton = this._cardElement.querySelector(this._cardConfig.buttonDelSelector);
-    delButton.addEventListener('click', function () {
-      delButton.closest('.photo-grid__item').remove();
+  
+    this._cardImage.addEventListener('click', () => { //открытие попапа
+      this._popupImage.src = this._cardImage.src;
+      this._popupImage.alt = this._cardImage.alt;
+      this._popupContainer.querySelector(cardConfig.captionPopupSelector).textContent = this._cardImage.alt;
+      this._popupContainer.classList.add('popup_opened');
     });
   }
 
@@ -40,7 +44,12 @@ class MakeCard {
     this._cardElement.querySelector('.photo-grid__caption').textContent = this._imageCaption; //caption
     this._cardImage.src = this._imageSrc; // src
     this._cardImage.alt = this._imageCaption; // alt
-    this._setEventListeners(this._imageSrc, this._imageCaption); //добавили прослушку в карточку
+    this._likeButton = this._cardElement.querySelector(cardConfig.buttonLikeSelector); //Нашли кнопку like
+    this._delButton = this._cardElement.querySelector(cardConfig.buttonDelSelector); //Нашли кнопку удаления
+    this._popupContainer = document.querySelector(cardConfig.imagePopupContainerSelector); //нашли попап
+    this._popupImage = this._popupContainer.querySelector(cardConfig.imagePopupSelector); //нашли картинку попапа
+    this._setEventListeners(); //добавили прослушку в карточку
+    
     return this._cardElement; //возвращаем элемент для вставки в DOM
   }
 }

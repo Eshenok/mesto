@@ -9,6 +9,14 @@ const config = {
   errorClass: 'popup__input-span-error_active',
 }
 
+class formValidate {
+  constructor(config) {
+    const formConfig = config;
+  }
+  
+  
+}
+
 function showErrorMessage(formElement, inputElement, errorMessage, config) {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);//нашли все span для вывода текста ошибки.
   errorElement.textContent = errorMessage; // Дали span'у текст ошибки
