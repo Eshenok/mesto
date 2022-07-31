@@ -1,21 +1,21 @@
 /*
 * Валидация формы
-* Прнимает на вход config с селекторами для работы форм.
+* Прнимает на вход config с селекторами для работы форм и селектор текущей формы.
  */
 
-const config = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.button',
-  inactiveButtonClass: 'button_type_disabled',
-  inputErrorClass: 'popup__input-error',
-  errorClass: 'popup__input-span-error_active',
-}
-
-class formValidate {
+class FormValidate {
   constructor(config, formElement) {
     this._config = config;
     this._formElement = document.querySelector(formElement);
+  }
+  
+  _checkValidate (inputElement) {
+    if (!inputElement.validity.valid) {
+      this._showErrorMessage(inputElement, inputElement.validationMessage);//Если не прошел проверку, то покажет message
+    } else {
+      this._hideErrorMessage(inputElement); //Спрятать сообщение об ошибке
+    }
+    this._switchButtonState();
   }
   
   _showErrorMessage (inputElement, errorMessage) {
@@ -33,19 +33,19 @@ class formValidate {
   }
 
   _setEventListeners () {
-    this._inputList = Array.from(this._formElement.querySelectorAll(config.inputSelector));
+    this._inputList = Array.from(this._formElement.querySelectorAll(this._config.inputSelector));
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
         this._checkValidate(inputElement);
-      })
-    })
+      });
+    });
   }
   
   _checkValidateForm () {
-    this._inputList = Array.from(this._formElement.querySelectorAll(config.inputSelector));
+    this._inputList = Array.from(this._formElement.querySelectorAll(this._config.inputSelector));
     return this._inputList.some((inputElement) => {
       return !inputElement.validity.valid
-    })
+    });
   }
   
   _switchButtonState () {
@@ -58,15 +58,6 @@ class formValidate {
       this._buttonElement.classList.remove(this._config.inactiveButtonClass);
     }
   }
-  
-  _checkValidate (inputElement) {
-    if (!inputElement.validity.valid) {
-      this._showErrorMessage(inputElement, inputElement.validationMessage);//Если не прошел проверку, то покажет message
-    } else {
-      this._hideErrorMessage(inputElement); //Спрятать сообщение об ошибке
-    }
-    this._switchButtonState();
-  }
 
   enableValidate () {
     this._setEventListeners();
@@ -75,9 +66,7 @@ class formValidate {
 
 }
 
-export {formValidate, config};
-
-const a = new formValidate(config, '.popup__form_type_add-content').enableValidate();
+export {FormValidate};
 
 /*
 function showErrorMessage(formElement, inputElement, errorMessage, config) {

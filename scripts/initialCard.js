@@ -38,12 +38,16 @@ const validateConfig = {
 
 const cardConfig = {
   buttonLikeSelector: '.button_icon_like',
-  buttonLikeActiveClass: 'button_icon_like-active',
   buttonDelSelector: '.button_icon_delete',
   buttonClosePopupSelector: '.button_close_image',
   imagePopupContainerSelector: '.popup_type_image',
   imagePopupSelector: '.popup__image',
   captionPopupSelector: '.popup__caption',
+  cardItemSelector: '.photo-grid__item',
+  cardImageSelector: '.photo-grid__image',
+  cardCaptionSelector: '.photo-grid__caption',
+  buttonLikeActiveClass: 'button_icon_like-active',
+  popupOpenedClass: 'popup_opened',
 }
 
 export { initialCards, validateConfig, cardConfig };
