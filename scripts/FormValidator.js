@@ -4,9 +4,9 @@
  */
 
 class FormValidate {
-  constructor(config, formElement) {
+  constructor(config, formSelector) {
     this._config = config;
-    this._formElement = document.querySelector(formElement);
+    this._formElement = document.querySelector(formSelector);
   }
   
   _checkValidate (inputElement) {
