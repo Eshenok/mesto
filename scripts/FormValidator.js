@@ -1,7 +1,6 @@
 /*
 * Валидация формы
 * Прнимает на вход config с селекторами для работы форм.
-
  */
 
 const config = {
@@ -34,32 +33,51 @@ class formValidate {
   }
 
   _setEventListeners () {
-    const inputList = Array.from(this._formElement.querySelectorAll(config.inputSelector));
-    inputList.forEach((inputElement) => {
+    this._inputList = Array.from(this._formElement.querySelectorAll(config.inputSelector));
+    this._inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
         this._checkValidate(inputElement);
       })
     })
   }
-
+  
+  _checkValidateForm () {
+    this._inputList = Array.from(this._formElement.querySelectorAll(config.inputSelector));
+    return this._inputList.some((inputElement) => {
+      return !inputElement.validity.valid
+    })
+  }
+  
+  _switchButtonState () {
+    this._buttonElement = this._formElement.querySelector(this._config.submitButtonSelector);
+    if (this._checkValidateForm()) {
+      this._buttonElement.setAttribute('disabled', '');
+      this._buttonElement.classList.add(this._config.inactiveButtonClass);
+    } else {
+      this._buttonElement.removeAttribute('disabled');
+      this._buttonElement.classList.remove(this._config.inactiveButtonClass);
+    }
+  }
+  
   _checkValidate (inputElement) {
     if (!inputElement.validity.valid) {
       this._showErrorMessage(inputElement, inputElement.validationMessage);//Если не прошел проверку, то покажет message
     } else {
       this._hideErrorMessage(inputElement); //Спрятать сообщение об ошибке
     }
+    this._switchButtonState();
   }
 
   enableValidate () {
     this._setEventListeners();
+    this._switchButtonState();
   }
 
 }
 
 export {formValidate, config};
 
-const a = new formValidate(config, '.popup__form_type_add-content');
-a.enableValidate();
+const a = new formValidate(config, '.popup__form_type_add-content').enableValidate();
 
 /*
 function showErrorMessage(formElement, inputElement, errorMessage, config) {
