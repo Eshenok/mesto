@@ -50,4 +50,29 @@ const cardConfig = {
   popupOpenedClass: 'popup_opened',
 }
 
-export { initialCards, validateConfig, cardConfig };
+const commonPopupConfig = {
+  popupOverlaySelector: '.popup__overlay',
+  closePopupButtonSelector: '.button_icon_close',
+  popupOpenedClass: 'popup_opened',
+  popupFormSelector: '.popup__form',
+}
+
+const popupProfileConfig = {
+  popupInputNameSelector: '.popup__input_type_name',
+  profileOccupationSelector: '.profile__occupation',
+  popupInputOccupationSelector: '.popup__input_type_occupation',
+  profileNameSelector: '.profile__name',
+  openProfileButtonSelector: '.button_icon_edit',
+  profileFormSelector: '.popup__form_type_edit-profile',
+}
+
+const popupCardConfig = {
+  cardSectionSelector: '.photo-grid',
+  popupInputCaptionSelector: '.popup__input_type_image-caption',
+  popupInputSrcSelector: '.popup__input_type_image-src',
+  openCardPopupButtonSelector: '.button_icon_add',
+  cardFormSelector: '.popup__form_type_add-content',
+  cardImageSelector: '.photo-grid__image',
+}
+
+export { initialCards, validateConfig, cardConfig, commonPopupConfig, popupProfileConfig, popupCardConfig};
