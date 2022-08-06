@@ -22,7 +22,9 @@ class MakeCard {
   }
   
   _handleDelButton () {
-    this._delButton.closest(this._config.cardItemSelector).remove();
+    const cardSelector = this._config.cardItemSelector;
+    this._delButton.closest(cardSelector).remove();
+    this._delButton = null;
   }
 
   _handleOpenCardPopup () {
