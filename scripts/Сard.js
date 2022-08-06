@@ -24,7 +24,14 @@ class MakeCard {
   _handleDelButton () {
     this._delButton.closest(this._config.cardItemSelector).remove();
   }
-  
+
+  _handleOpenCardPopup () {
+    this._popupImage.src = this._cardImage.src;
+    this._popupImage.alt = this._cardImage.alt;
+    this._popupContainer.querySelector(this._config.captionPopupSelector).textContent = this._cardImage.alt;
+    this._popupContainer.classList.add(this._config.popupOpenedClass);
+  }
+
   _setEventListeners () { //function добавления прослушки
     this._likeButton.addEventListener('click', () => {
       this._handleLikeButton();
@@ -35,10 +42,7 @@ class MakeCard {
     });
   
     this._cardImage.addEventListener('click', () => { //открытие попапа
-      this._popupImage.src = this._cardImage.src;
-      this._popupImage.alt = this._cardImage.alt;
-      this._popupContainer.querySelector(this._config.captionPopupSelector).textContent = this._cardImage.alt;
-      this._popupContainer.classList.add(this._config.popupOpenedClass);
+      this._handleOpenCardPopup();
     });
   }
 
