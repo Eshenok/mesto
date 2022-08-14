@@ -1,7 +1,8 @@
 'use strict'
 
-import { FormValidate } from './FormValidator.js';
-import {MakeCard} from "./Сard.js";
+import '../pages/index.css';
+import FormValidate from '../scripts/FormValidator.js';
+import MakeCard from "../scripts/Сard.js";
 
 const initialCards = [
   {

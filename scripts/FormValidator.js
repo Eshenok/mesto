@@ -3,7 +3,7 @@
 * Прнимает на вход config с селекторами для работы форм и селектор текущей формы.
  */
 
-class FormValidate {
+export default class FormValidate {
   constructor(config, formSelector) {
     this._config = config;
     this._formElement = document.querySelector(formSelector);
@@ -65,5 +65,3 @@ class FormValidate {
   }
 
 }
-
-export {FormValidate};

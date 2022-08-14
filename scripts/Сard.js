@@ -1,10 +1,10 @@
 /*
 * Создание карточки.
 * Принимает на вход Описание картинки, ссылку на картинку и ID макета карточки
-* имеет 3 прослушки: Кнопка like, кнопка delete, открытие попапа по нажатию на ихображение
+* имеет 3 прослушки: Кнопка like, кнопка delete, открытие попапа по нажатию на изображение
  */
 
-class MakeCard {
+export default class MakeCard {
   constructor(imageCaption, imageSrc, templateId, cardConfig) {
   this._imageCaption = imageCaption;
   this._imageSrc = imageSrc;
@@ -63,5 +63,3 @@ class MakeCard {
     return this._cardElement; //возвращаем элемент для вставки в DOM
   }
 }
-
-export { MakeCard };
