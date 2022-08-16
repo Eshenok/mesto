@@ -48,4 +48,7 @@ const cardConfig = {
   popupOpenedClass: 'popup_opened',
 }
 
-export {initialCards, validateConfig, cardConfig};
+const profileOpenButton = document.querySelector('.button_icon_edit');
+const cardOpenButton = document.querySelector('.button_icon_add');
+
+export {initialCards, validateConfig, cardConfig, profileOpenButton, cardOpenButton};

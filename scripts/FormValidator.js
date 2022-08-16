@@ -15,7 +15,7 @@ export default class FormValidate {
     } else {
       this._hideErrorMessage(inputElement); //Спрятать сообщение об ошибке
     }
-    this.switchButtonState();
+    this._switchButtonState();
   }
   
   _showErrorMessage (inputElement, errorMessage) {
@@ -48,7 +48,7 @@ export default class FormValidate {
     });
   }
   
-  switchButtonState () {
+  _switchButtonState () {
     this._buttonElement = this._formElement.querySelector(this._config.submitButtonSelector);
     if (this._checkValidateForm()) {
       this._buttonElement.setAttribute('disabled', '');
@@ -61,7 +61,7 @@ export default class FormValidate {
 
   enableValidate () {
     this._setEventListeners();
-    this.switchButtonState();
+    this._switchButtonState();
   }
 
 }
