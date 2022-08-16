@@ -26,14 +26,7 @@ export default class MakeCard {
     this._delButton.closest(cardSelector).remove();
     this._delButton = null;
   }
-
-  _handleOpenCardPopup () {
-    this._popupImage.src = this._cardImage.src;
-    this._popupImage.alt = this._cardImage.alt;
-    this._popupContainer.querySelector(this._config.captionPopupSelector).textContent = this._cardImage.alt;
-    this._popupContainer.classList.add(this._config.popupOpenedClass);
-  }
-
+  
   _setEventListeners () { //function добавления прослушки
     this._likeButton.addEventListener('click', () => {
       this._handleLikeButton();
@@ -41,10 +34,6 @@ export default class MakeCard {
     
     this._delButton.addEventListener('click', () => { // удаление карточки
       this._handleDelButton();
-    });
-  
-    this._cardImage.addEventListener('click', () => { //открытие попапа
-      this._handleOpenCardPopup();
     });
   }
 
@@ -57,7 +46,6 @@ export default class MakeCard {
     this._likeButton = this._cardElement.querySelector(this._config.buttonLikeSelector); //Нашли кнопку like
     this._delButton = this._cardElement.querySelector(this._config.buttonDelSelector); //Нашли кнопку удаления
     this._popupContainer = document.querySelector(this._config.imagePopupContainerSelector); //нашли попап
-    this._popupImage = this._popupContainer.querySelector(this._config.imagePopupSelector); //нашли картинку попапа
     this._setEventListeners(); //добавили прослушку в карточку
     
     return this._cardElement; //возвращаем элемент для вставки в DOM
