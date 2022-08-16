@@ -5,9 +5,9 @@
  */
 
 export default class MakeCard {
-  constructor(imageCaption, imageSrc, templateId, cardConfig) {
-  this._imageCaption = imageCaption;
-  this._imageSrc = imageSrc;
+  constructor(data, templateId, cardConfig) {
+  this._imageCaption = data.name;
+  this._imageSrc = data.link;
   this._templateId = templateId;
   this._config = cardConfig;
   }

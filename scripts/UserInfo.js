@@ -13,7 +13,7 @@ export default class UserInfo {
   }
   
   getUserInfo () {
-    return {name: this._userName.textContent, occupation: this._userOccupation};
+    return {name: this._userName.textContent, occupation: this._userOccupation.textContent};
   }
   
   setUserInfo (name, occupation) {
