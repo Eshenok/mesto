@@ -1,12 +1,13 @@
 'use strict'
 
-import FormValidate from '../scripts/FormValidator.js';
-import MakeCard from "../scripts/Сard.js";
-import Section from "../scripts/Section.js";
-import PopupWithForm from "../scripts/PopupWithForm.js";
-import PopupWithImage from "../scripts/PopupWithImage.js";
-import {initialCards, cardConfig, validateConfig, profileOpenButton, cardOpenButton} from "../scripts/constants.js";
-import UserInfo from "../scripts/UserInfo.js";
+import '../pages/index.css';
+import FormValidate from './scripts/FormValidator.js';
+import MakeCard from "./scripts/Сard.js";
+import Section from "./scripts/Section.js";
+import PopupWithForm from "./scripts/PopupWithForm.js";
+import PopupWithImage from "./scripts/PopupWithImage.js";
+import {initialCards, cardConfig, validateConfig, profileOpenButton, cardOpenButton} from "./scripts/constants.js";
+import UserInfo from "./scripts/UserInfo.js";
 
 //Функции
 function preloadCard (array) { // Предзагрузка карточек (обязательно array), обходим массив и вызываем функцию генерации карточек.
@@ -45,7 +46,6 @@ function handleCardAddSubmit (evt) {
   const {'popup__input_type_image-caption': name, 'popup__input_type_image-src': link,} = this.getInputValues(); // через деструктуризацию заменяем имена на нужные нам
   generateCard({name, link}); // генерим карточку и вставляем ее
   this.closePopup();
-  popupCardValidate._switchButtonState(); // меняем состояние кнопки после reset();
 }
 
 // const работы попапа профиля
@@ -71,11 +71,11 @@ profileOpenButton.addEventListener('click', () => { //Прослушка кно�
   const inputOccupation = document.querySelector('.popup__input_type_occupation');
   inputName.value = userInfoValues.name;
   inputOccupation.value = userInfoValues.occupation; // вставляем в инпуты значения
-  popupProfileValidate._switchButtonState();
+  popupProfileValidate.switchStateForm(); // Решение проблемы с сохранением ошибки после закрытия попапа
   profilePopup.openPopup();
 });
 
 cardOpenButton.addEventListener('click', () => { //Прослушка кнопки открытия попапа добавления карточки
-  popupCardValidate._switchButtonState();
+  popupCardValidate.switchStateForm();
   cardPopup.openPopup();
 });

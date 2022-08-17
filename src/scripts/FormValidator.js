@@ -27,13 +27,12 @@ export default class FormValidate {
 
   _hideErrorMessage (inputElement) {
     this._errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);//нашли все span для вывода текста ошибки.
-    this._errorElement.textContent = ' '; // Дали span'у текст ошибки
-    inputElement.classList.remove(this._config.inputErrorClass); //дали border для input'a
-    this._errorElement.classList.remove(this._config.errorClass); //display: block для span
+    this._errorElement.textContent = ' ';
+    inputElement.classList.remove(this._config.inputErrorClass);
+    this._errorElement.classList.remove(this._config.errorClass);
   }
 
   _setEventListeners () {
-    this._inputList = Array.from(this._formElement.querySelectorAll(this._config.inputSelector));
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
         this._checkValidate(inputElement);
@@ -42,9 +41,14 @@ export default class FormValidate {
   }
   
   _checkValidateForm () {
-    this._inputList = Array.from(this._formElement.querySelectorAll(this._config.inputSelector));
     return this._inputList.some((inputElement) => {
       return !inputElement.validity.valid
+    });
+  }
+  
+  _handleHideErrorMessage () { // обработчик удаления текста ошибки
+    this._inputList.forEach((inputElement) => {
+      this._hideErrorMessage(inputElement);
     });
   }
   
@@ -59,7 +63,13 @@ export default class FormValidate {
     }
   }
 
+  switchStateForm () { // функция для открытия попапов, убирает ошибки у всех полей и устанавливает корректный статус кнопки
+    this._handleHideErrorMessage();
+    this._switchButtonState();
+  }
+  
   enableValidate () {
+    this._inputList = Array.from(this._formElement.querySelectorAll(this._config.inputSelector));
     this._setEventListeners();
     this._switchButtonState();
   }
