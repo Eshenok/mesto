@@ -1,51 +1,49 @@
 'use strict'
 
 import '../pages/index.css';
-import FormValidate from './scripts/FormValidator.js';
-import MakeCard from "./scripts/Сard.js";
-import Section from "./scripts/Section.js";
-import PopupWithForm from "./scripts/PopupWithForm.js";
-import PopupWithImage from "./scripts/PopupWithImage.js";
-import {initialCards, cardConfig, validateConfig, profileOpenButton, cardOpenButton} from "./scripts/constants.js";
-import UserInfo from "./scripts/UserInfo.js";
+import FormValidate from './components/FormValidator.js';
+import Card from "./components/Сard.js";
+import Section from "./components/Section.js";
+import PopupWithForm from "./components/PopupWithForm.js";
+import PopupWithImage from "./components/PopupWithImage.js";
+import { initialCards } from "./utils/initialCard.js";
+import {cardConfig, validateConfig, profileOpenButton, cardOpenButton, inputOccupation, inputName} from "./scripts/constants.js";
+import UserInfo from "./components/UserInfo.js";
 
 //Функции
-function preloadCard (array) { // Предзагрузка карточек (обязательно array), обходим массив и вызываем функцию генерации карточек.
-  array.forEach((elem) => {
-    generateCard(elem);
-  })
-}
+// function preloadCard (array) { // Предзагрузка карточек (обязательно array), обходим массив и вызываем функцию генерации карточек.
+//   array.forEach((elem) => {
+//     generateCard(elem);
+//   })
+// }
 
-function generateCard (elem) { //Генерация карточек и добавление в разметку
-  const preloadedCards = new Section({ // Создаем const -> Секцию -> в нее передаем items (карточки) и функцию добавления чего-то в разметку и секцию куда добавить
-    item: elem,
-    renderer: (item) => { // внутри renderer -> создаем константу карточки и генерим ее через Card
-    const card = new MakeCard(item, '#photo-grid__template', cardConfig, handleImageClick);
-    const cardElement = card.generateCard();
-    preloadedCards.setItem(cardElement);
-    }
-    }, '.photo-grid');
-  preloadedCards.renderItems(); // затем вставляем в разметку.
+const cardList = new Section({ renderer: (items) => { // внутри renderer -> создаем константу карточки и генерим ее через Card
+    const card = new Card(items, '#photo-grid__template', cardConfig, handleImageClick);
+    cardList.setItem(card.generateCard());
+  }
+}, '.photo-grid');
+
+function generateCard (items) { //Генерация карточек и добавление в разметку
+  cardList.renderItems(items); // затем вставляем в разметку.
 }
 
 function handleImageClick (item) { // обработчик клика по карточке
-  const cardPopup = new PopupWithImage(item, '.popup_type_image');
-  cardPopup.setEventListeners();
-  cardPopup.openPopup();
+  imagePopup.open(item);
 }
 
-function handleProfileEditSubmit (evt) {
+function handleProfileEditSubmit (evt, values) {
   evt.preventDefault();
-  const inputValues = this.getInputValues(); // делает const getInputValues();
+  const inputValues = values; // делает const getInputValues();
   userInfo.setUserInfo(inputValues.popup__input_type_name, inputValues.popup__input_type_occupation); // класс userInfo меняет на страничке имя и профессию
-  this.closePopup();
+  this.close();
 }
 
-function handleCardAddSubmit (evt) {
+function handleCardAddSubmit (evt, values) {
   evt.preventDefault();
-  const {'popup__input_type_image-caption': name, 'popup__input_type_image-src': link,} = this.getInputValues(); // через деструктуризацию заменяем имена на нужные нам
-  generateCard({name, link}); // генерим карточку и вставляем ее
-  this.closePopup();
+  const {'popup__input_type_image-caption': name, 'popup__input_type_image-src': link,} = values; // через деструктуризацию заменяем имена на нужные нам
+  const card = new Card({name, link}, '#photo-grid__template', cardConfig, handleImageClick);
+  cardList.setItem(card.generateCard());
+  this.close();
 }
 
 // const работы попапа профиля
@@ -57,8 +55,12 @@ const popupProfileValidate = new FormValidate(validateConfig, '.popup__form_type
 const cardPopup = new PopupWithForm('.popup_type_card', handleCardAddSubmit);
 const popupCardValidate = new FormValidate(validateConfig, '.popup__form_type_add-content');
 
+// const работы попапа картинки
+const imagePopup = new PopupWithImage('.popup_type_image');
+imagePopup.setEventListeners();
+
 //вызовы функций
-preloadCard(initialCards);
+generateCard(initialCards);
 profilePopup.setEventListeners();
 cardPopup.setEventListeners();
 popupProfileValidate.enableValidate();
@@ -67,15 +69,13 @@ popupCardValidate.enableValidate();
 //Прослушки
 profileOpenButton.addEventListener('click', () => { //Прослушка кнопки открытия попапа редактирования профиля
   const userInfoValues = userInfo.getUserInfo();
-  const inputName = document.querySelector('.popup__input_type_name');
-  const inputOccupation = document.querySelector('.popup__input_type_occupation');
   inputName.value = userInfoValues.name;
   inputOccupation.value = userInfoValues.occupation; // вставляем в инпуты значения
   popupProfileValidate.switchStateForm(); // Решение проблемы с сохранением ошибки после закрытия попапа
-  profilePopup.openPopup();
+  profilePopup.open();
 });
 
 cardOpenButton.addEventListener('click', () => { //Прослушка кнопки открытия попапа добавления карточки
   popupCardValidate.switchStateForm();
-  cardPopup.openPopup();
+  cardPopup.open();
 });

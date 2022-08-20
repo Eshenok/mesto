@@ -4,7 +4,7 @@
 * имеет 3 прослушки: Кнопка like, кнопка delete, открытие попапа по нажатию на изображение
  */
 
-export default class MakeCard {
+export default class Card {
     constructor(data, templateId, cardConfig, handleImageClick) {
       this._data = data;
       this._templateId = templateId;
