@@ -13,19 +13,9 @@ export default class PopupWithForm extends Popup {
     this._inputList.forEach((elem) => {
       this._inputValues[elem.name] = elem.value;
     });
-    // oldKeysArray.forEach((oldKey, index) => {
-    //   this._renameKey(this._inputValues, oldKey, newKeysArray[index]);
-    // });
+
     return this._inputValues;
   }
-  
-  // _renameKey (obj, oldKey, newKey) { //функция переименования ключей
-  //   if (oldKey !== newKey) { //проверяет ключ
-  //     Object.defineProperty(obj, newKey,
-  //       Object.getOwnPropertyDescriptor(obj, oldKey)); // заменяем на новый
-  //     delete obj[oldKey]; // удаляем старый
-  //   }
-  // }
   
   setEventListeners() {
     super.setEventListeners();
