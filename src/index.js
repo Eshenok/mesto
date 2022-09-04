@@ -54,7 +54,7 @@ function handleCardAddSubmit (evt, values) {
 }
 
 //const работы попапа профиля изменения картинки
-const profileImagePopup = new PopupWithForm('.popup_type_profile-image', handleProfileImageEditSubmit);
+// const profileImagePopup = new PopupWithForm('.popup_type_profile-image', handleProfileImageEditSubmit);
 
 
 // const работы попапа профиля
