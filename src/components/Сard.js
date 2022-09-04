@@ -5,11 +5,13 @@
  */
 
 export default class Card {
-    constructor(data, templateId, cardConfig, handleImageClick) {
+    constructor(data, templateId, cardConfig, handleImageClick, handleDelClick, checkOwner) {
       this._data = data;
       this._templateId = templateId;
       this._config = cardConfig;
       this._handleImageClick = handleImageClick;
+      this._handleDelClick = handleDelClick;
+      this._checkOwner = checkOwner;
     }
     _getTemplate () {
       const cardElement = document.querySelector(this._templateId).content.cloneNode(true); //нашли template и скопировали его
@@ -32,7 +34,7 @@ export default class Card {
       });
 
       this._delButton.addEventListener('click', () => { // удаление карточки
-        this._handleDelButton();
+        this._handleDelClick(this._cardId, this._handleDelButton.bind(this));
       });
 
       this._cardImage.addEventListener('click', () => { //открытие попапа
@@ -47,7 +49,13 @@ export default class Card {
       this._cardImage.src = this._data.link; // src
       this._cardImage.alt = this._data.name; // alt
       this._likeButton = this._cardElement.querySelector(this._config.buttonLikeSelector); //Нашли кнопку like
+      this._likeCounter = this._cardElement.querySelector('.photo-grid__counter');
+      this._likeCounter.textContent = this._data.likes.length;
       this._delButton = this._cardElement.querySelector(this._config.buttonDelSelector); //Нашли кнопку удаления
+      this._cardId = this._data['_id'];
+      if (!this._checkOwner(this._data.owner)) {
+        this._delButton.classList.add('button_type_none');
+      }
       this._setEventListeners(); //добавили прослушку в карточку
 
       return this._cardElement; //возвращаем элемент для вставки в DOM

@@ -25,5 +25,8 @@ const profileOpenButton = document.querySelector('.button_icon_edit');
 const cardOpenButton = document.querySelector('.button_icon_add');
 const inputName = document.querySelector('.popup__input_type_name');
 const inputOccupation = document.querySelector('.popup__input_type_occupation');
-
-export {validateConfig, cardConfig, profileOpenButton, cardOpenButton, inputName, inputOccupation};
+const profileUserName = document.querySelector('.profile__name');
+const confirmButton = document.querySelector('.button_type_confirm');
+const profileUserOccupation = document.querySelector('.profile__occupation');
+const profileUserAvatar = document.querySelector('.profile__avatar');
+export {validateConfig, cardConfig, profileOpenButton, cardOpenButton, inputName, inputOccupation, profileUserAvatar, profileUserName, profileUserOccupation, confirmButton};
