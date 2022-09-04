@@ -53,9 +53,22 @@ function handleCardAddSubmit (evt, values) {
   this.close();
 }
 
-//const работы попапа профиля изменения картинки
-// const profileImagePopup = new PopupWithForm('.popup_type_profile-image', handleProfileImageEditSubmit);
+function handleProfileImageSubmit (evt, values) {
+  evt.preventDefault();
+  const {'popup__input_type_profile-image': url} = values;
+  api.putNewAvatar(url)
+    .then(res => {
+      profileUserAvatar.style.backgroundImage = `url(${res.avatar})`;
+      profileImagePopup.close();
+    })
+    .catch(error => {
+      console.log(error);
+    })
+}
 
+//const работы попапа профиля изменения картинки
+const profileImagePopup = new PopupWithForm('.popup_type_profile-image', handleProfileImageSubmit);
+const popupImageProfileValidate = new FormValidate(validateConfig, '.popup__form_type_profile-image');
 
 // const работы попапа профиля
 const userInfo = new UserInfo('.profile__name', '.profile__occupation');
@@ -105,15 +118,15 @@ api.getUserInfo()
     console.log(error);
   })
 
-// api.removeCard(cardId);
-
 //вызовы функций
 profilePopup.setEventListeners();
 cardPopup.setEventListeners();
 imagePopup.setEventListeners();
 confirmPopup.setEventListeners();
+profileImagePopup.setEventListeners();
 popupProfileValidate.enableValidate();
 popupCardValidate.enableValidate();
+popupImageProfileValidate.enableValidate();
 
 //Прослушки
 profileOpenButton.addEventListener('click', () => { //Прослушка кнопки открытия попапа редактирования профиля
@@ -128,6 +141,11 @@ cardOpenButton.addEventListener('click', () => { //Прослушка кнопк
   popupCardValidate.switchStateForm();
   cardPopup.open();
 });
+
+profileUserAvatar.addEventListener('click', () => {
+  popupImageProfileValidate.switchStateForm();
+  profileImagePopup.open();
+})
 
 confirmButton.addEventListener('click', () => {
   api.removeCard(confirmPopup.getCardId())

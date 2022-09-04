@@ -69,7 +69,26 @@ export default class Api {
         return Promise.reject(`Ошибка: ${res.status}`);
       })
   }
-  
+
+  putNewAvatar(avatarUrl) {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: {
+        authorization: '77ff3fbe-135e-4442-b69c-13d620392262',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        avatar: avatarUrl
+      })
+    })
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Ошибка: ${res.status}`);
+      })
+  }
+
   removeCard(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: 'DELETE',

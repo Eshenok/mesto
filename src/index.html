@@ -1,4 +1,4 @@
- м<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="utf-8">
@@ -87,10 +87,10 @@
       <div class="popup__overlay"></div>
       <div class="popup__container">
         <p class="popup__title">Обновить аватар</p>
-        <form class="popup__form" novalidate>
+        <form class="popup__form popup__form_type_profile-image" novalidate>
           <div class="popup__label">
             <input type="url" id="popup__input-profile-image" class="popup__input popup__input_type_profile-image" name="popup__input_type_profile-image" required placeholder="Ссылка на картинку">
-            <span class="popup__input-span-error popup__input-image-src-error"> </span>
+            <span class="popup__input-span-error popup__input-profile-image-error"> </span>
           </div>
           <button type="submit" class="button button_theme_dark button_type_update">Создать</button>
           <button type="button" class="button button_icon_close button_close_card"></button>

@@ -22,6 +22,7 @@
 
 .profile__avatar:hover:before {
   visibility: visible;
+  cursor: pointer;
   opacity: 1;
 }
 
