@@ -8,5 +8,7 @@ The site is designed to demonstrate layout and programming skills.
 * css3  
 * adaptive layout  
 * JavaScript  
+* webpack
+* promise
   
 ## link: https://eshenok.github.io/mesto/
