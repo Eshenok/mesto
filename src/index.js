@@ -1,6 +1,6 @@
 'use strict'
 
-// import './pages/index.css';
+import './pages/index.css';
 import FormValidate from './components/FormValidator.js';
 import Card from "./components/Сard.js";
 import Section from "./components/Section.js";
@@ -13,7 +13,7 @@ import PopupConfirm from "./components/PopupConfirm.js";
 
 //Функции
 function createCard ({name, link, likes, _id, owner}) { // Создание карточки
-  const card = new Card({name, link, likes, _id, owner}, '#photo-grid__template', cardConfig, handleImageClick, handleDelClick, checkOwner);
+  const card = new Card({name, link, likes, _id, owner}, '#photo-grid__template', cardConfig, handleImageClick, handleDelClick, checkOwner, handlePutLike, handleRemoveLike);
   return card.generateCard(); // возвращаем для использования
 }
 
@@ -35,31 +35,69 @@ function handleDelClick (cardId, handleDelButton) {
 
 function handleProfileEditSubmit (evt, values) {
   evt.preventDefault();
+  profilePopup.renderLoading(true, 'Сохряняем...');
   const inputValues = values; // делает const getInputValues();
   api.putProfileData(inputValues.popup__input_type_name, inputValues.popup__input_type_occupation)
     .then(res => {
       userInfo.setUserInfo(res.name, res.about);
+    })
+    .catch(error => {
+      console.log(error);
+    })
+    .finally(() => {
+      profilePopup.renderLoading(false);
     })
   this.close();
 }
 
 function handleCardAddSubmit (evt, values) {
   evt.preventDefault();
+  cardPopup.renderLoading(true, 'Создаем...')
   const {'popup__input_type_image-caption': name, 'popup__input_type_image-src': link,} = values; // через деструктуризацию заменяем имена на нужные нам
   api.putNewCard(name, link)
     .then(res => {
       cardList.prependItem(createCard(res));
+    })
+    .catch(error => {
+      console.log(error);
+    })
+    .finally(() => {
+      cardPopup.renderLoading(false);
     })
   this.close();
 }
 
 function handleProfileImageSubmit (evt, values) {
   evt.preventDefault();
+  profileImagePopup.renderLoading(true, 'Сохряняем...');
   const {'popup__input_type_profile-image': url} = values;
   api.putNewAvatar(url)
     .then(res => {
       profileUserAvatar.style.backgroundImage = `url(${res.avatar})`;
+    })
+    .catch(error => {
+      console.log(error);
+    })
+    .finally(() => {
+      profileImagePopup.renderLoading(false);
       profileImagePopup.close();
+    })
+}
+
+function handlePutLike (cardId, likeCounter) {
+  api.putLike(cardId)
+    .then(res => {
+    likeCounter.textContent = res.likes.length;
+    })
+    .catch(error => {
+      console.log(error);
+    })
+}
+
+function handleRemoveLike (cardId, likeCounter) {
+  api.removeLike(cardId)
+    .then(res => {
+      likeCounter.textContent = res.likes.length;
     })
     .catch(error => {
       console.log(error);

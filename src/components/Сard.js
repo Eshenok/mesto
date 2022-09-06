@@ -5,13 +5,15 @@
  */
 
 export default class Card {
-    constructor(data, templateId, cardConfig, handleImageClick, handleDelClick, checkOwner) {
+    constructor(data, templateId, cardConfig, handleImageClick, handleDelClick, checkOwner, handlePutLike, handleRemoveLike) {
       this._data = data;
       this._templateId = templateId;
       this._config = cardConfig;
       this._handleImageClick = handleImageClick;
       this._handleDelClick = handleDelClick;
       this._checkOwner = checkOwner;
+      this._handlePutLike = handlePutLike;
+      this._handleRemoveLike = handleRemoveLike;
     }
     _getTemplate () {
       const cardElement = document.querySelector(this._templateId).content.cloneNode(true); //нашли template и скопировали его
@@ -19,7 +21,13 @@ export default class Card {
     }
 
     _handleLikeButton () {
-      this._likeButton.classList.toggle(this._config.buttonLikeActiveClass);
+      if (this._likeButton.classList.contains(this._config.buttonLikeActiveClass)) {
+        this._likeButton.classList.remove(this._config.buttonLikeActiveClass);
+        this._handleRemoveLike(this._data['_id'], this._likeCounter);
+      } else {
+        this._handlePutLike(this._data['_id'], this._likeCounter);
+        this._likeButton.classList.add(this._config.buttonLikeActiveClass);
+      }
     }
 
     _handleDelButton () {
@@ -55,6 +63,12 @@ export default class Card {
       this._cardId = this._data['_id'];
       if (!this._checkOwner(this._data.owner)) {
         this._delButton.classList.add('button_type_none');
+      }
+      if (this._data.likes.some(elem => {
+        return this._checkOwner(elem);
+      })
+      ) {
+        this._likeButton.classList.add(this._config.buttonLikeActiveClass);
       }
       this._setEventListeners(); //добавили прослушку в карточку
 

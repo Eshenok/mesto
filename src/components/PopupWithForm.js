@@ -17,6 +17,16 @@ export default class PopupWithForm extends Popup {
     return this._inputValues;
   }
   
+  renderLoading (isLoading, loadingText) {
+    this._buttonSubmit = this._form.querySelector('.button_theme_dark');
+    if (isLoading) {
+      this._oldText = this._buttonSubmit.textContent;
+      this._buttonSubmit.textContent = loadingText;
+    } else {
+      this._buttonSubmit.textContent = this._oldText;
+    }
+  }
+  
   setEventListeners() {
     super.setEventListeners();
     this._form.addEventListener('submit', (evt) => {this._handleSubmitForm(evt, this._getInputValues())});
