@@ -7,7 +7,7 @@ export default class Popup {
   
   _checkKeypressEsc (evt) {
     if (evt.key === 'Escape') {
-      this.close(document.querySelector('.popup_opened'));
+      this.close();
     }
   }
   

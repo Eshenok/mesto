@@ -1,31 +1,29 @@
 export default class Api {
   constructor(options) {
     this._baseUrl = options.baseUrl;
+    this._headers = options.headers;
   }
   
+  _getResponseData(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Ошибка: ${res.status}`)
+  }
+
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
-      headers: {
-        authorization: '77ff3fbe-135e-4442-b69c-13d620392262'
-      },
+      headers: this._headers,
     }).then(res => {
-      if (res.ok) {
-        return res.json(); // возврат json массива из объектов { likes, _id, name, link, owner, createdAt }
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);//возврат ошибки
+      return this._getResponseData(res);
     })
   }
-  
+
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
-      headers: {
-        authorization: '77ff3fbe-135e-4442-b69c-13d620392262'
-      },
+      headers: this._headers,
     }).then(res => {
-      if (res.ok) {
-        return res.json(); // возврат json {name, about, avatar, _id, cohort}
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);//возврат ошибки
+      return this._getResponseData(res);
     })
   }
   
@@ -33,69 +31,48 @@ export default class Api {
   putProfileData(name, about) {
     return fetch(`${this._baseUrl}/users/me`, { // Редактирование профиля
       method: 'PATCH',
-      headers: {
-        authorization: '77ff3fbe-135e-4442-b69c-13d620392262',
-        'Content-Type': 'application/json'
-      },
+      headers: this._headers,
       body: JSON.stringify({
         name: name,
         about: about
       })
     })
       .then(res => {
-        if (res.ok) {
-          return res.json(); // возврат json {name, about, avatar, _id, cohort}
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);//возврат ошибки
+        return this._getResponseData(res);
       })
   }
   
   putNewCard(name, link) {
     return fetch(`${this._baseUrl}/cards `, {
       method: 'POST',
-      headers: {
-        authorization: '77ff3fbe-135e-4442-b69c-13d620392262',
-        'Content-Type': 'application/json'
-      },
+      headers: this._headers,
       body: JSON.stringify({
         name: name,
         link: link
       })
     })
       .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
+        return this._getResponseData(res);
       })
   }
 
   putNewAvatar(avatarUrl) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
-      headers: {
-        authorization: '77ff3fbe-135e-4442-b69c-13d620392262',
-        'Content-Type': 'application/json'
-      },
+      headers: this._headers,
       body: JSON.stringify({
         avatar: avatarUrl
       })
     })
       .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
+        return this._getResponseData(res);
       })
   }
 
   removeCard(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: 'DELETE',
-      headers: {
-        authorization: '77ff3fbe-135e-4442-b69c-13d620392262',
-        'Content-Type': 'application/json'
-      },
+      headers: this._headers,
     })
       .then(res => {
         if (res.ok) {
@@ -108,30 +85,20 @@ export default class Api {
   putLike (cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: 'PUT',
-      headers: {
-        authorization: '77ff3fbe-135e-4442-b69c-13d620392262'
-      }
+      headers: this._headers,
     })
       .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
+        return this._getResponseData(res);
       })
   }
   
   removeLike (cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: 'DELETE',
-      headers: {
-        authorization: '77ff3fbe-135e-4442-b69c-13d620392262'
-      }
+      headers: this._headers,
     })
       .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
+        return this._getResponseData(res);
       })
   }
   

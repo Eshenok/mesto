@@ -4,9 +4,9 @@
  */
 
 export default class FormValidate {
-  constructor(config, formSelector) {
+  constructor(config, formElement) {
     this._config = config;
-    this._formElement = document.querySelector(formSelector);
+    this._formElement = formElement;
   }
   
   _checkValidate (inputElement) {
@@ -53,7 +53,6 @@ export default class FormValidate {
   }
   
   _switchButtonState () {
-    this._buttonElement = this._formElement.querySelector(this._config.submitButtonSelector);
     if (this._checkValidateForm()) {
       this._buttonElement.setAttribute('disabled', '');
       this._buttonElement.classList.add(this._config.inactiveButtonClass);
@@ -69,6 +68,7 @@ export default class FormValidate {
   }
   
   enableValidate () {
+    this._buttonElement = this._formElement.querySelector(this._config.submitButtonSelector);
     this._inputList = Array.from(this._formElement.querySelectorAll(this._config.inputSelector));
     this._setEventListeners();
     this._switchButtonState();

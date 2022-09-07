@@ -10,10 +10,24 @@ export default class UserInfo {
   constructor(userNameSelector, userOccupationSelector) {
     this._userName = document.querySelector(userNameSelector);
     this._userOccupation = document.querySelector(userOccupationSelector);
+    this._profileAvatar = document.querySelector('.profile__avatar');
+
   }
   
   getUserInfo () {
     return {name: this._userName.textContent, occupation: this._userOccupation.textContent};
+  }
+
+  getUserId () {
+    return this._userId;
+  }
+
+  setUserId (userId) {
+    this._userId = userId;
+  }
+
+  setUserAvatar (url) {
+    this._profileAvatar.style.backgroundImage = `url(${url})`;
   }
   
   setUserInfo (name, occupation) {

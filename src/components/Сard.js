@@ -5,40 +5,27 @@
  */
 
 export default class Card {
-    constructor(data, templateId, cardConfig, handleImageClick, handleDelClick, checkOwner, handlePutLike, handleRemoveLike) {
+    constructor(data, userId,templateId, cardConfig, handleImageClick, handleDelClick, handleLike) {
       this._data = data;
+      this._userId = userId;
       this._templateId = templateId;
       this._config = cardConfig;
       this._handleImageClick = handleImageClick;
       this._handleDelClick = handleDelClick;
-      this._checkOwner = checkOwner;
-      this._handlePutLike = handlePutLike;
-      this._handleRemoveLike = handleRemoveLike;
+      this._handleLike = handleLike;
     }
     _getTemplate () {
       const cardElement = document.querySelector(this._templateId).content.cloneNode(true); //нашли template и скопировали его
       return cardElement; //вернули для дальнейшего использования
     }
 
-    _handleLikeButton () {
-      if (this._likeButton.classList.contains(this._config.buttonLikeActiveClass)) {
-        this._likeButton.classList.remove(this._config.buttonLikeActiveClass);
-        this._handleRemoveLike(this._data['_id'], this._likeCounter);
-      } else {
-        this._handlePutLike(this._data['_id'], this._likeCounter);
-        this._likeButton.classList.add(this._config.buttonLikeActiveClass);
-      }
-    }
-
     _handleDelButton () {
-      const cardSelector = this._config.cardItemSelector;
-      this._delButton.closest(cardSelector).remove();
-      this._delButton = null;
+      this._delButton.closest(this._cardElement).remove();
     }
 
     _setEventListeners () { //function добавления прослушки
       this._likeButton.addEventListener('click', () => {
-        this._handleLikeButton();
+        this._handleLike(this._cardId);
       });
 
       this._delButton.addEventListener('click', () => { // удаление карточки
@@ -48,6 +35,20 @@ export default class Card {
       this._cardImage.addEventListener('click', () => { //открытие попапа
         this._handleImageClick(this._data);
       });
+    }
+
+    _updateLikesView () {
+      this._likeCounter.textContent = this._likes.length;
+      this._likeButton.classList.toggle(this._config.buttonLikeActiveClass, this.isLiked()); //если второй параметр false - убирает класс, true - добавляет;
+    }
+
+    isLiked () {
+      return this._likes.some((like) => like._id === this._userId); // наличие собственного лайка
+    }
+
+    updateLikes(likes) {
+      this._likes = likes;
+      this._updateLikesView()
     }
 
     generateCard () {
@@ -61,15 +62,19 @@ export default class Card {
       this._likeCounter.textContent = this._data.likes.length;
       this._delButton = this._cardElement.querySelector(this._config.buttonDelSelector); //Нашли кнопку удаления
       this._cardId = this._data['_id'];
-      if (!this._checkOwner(this._data.owner)) {
+      if (!(this._data.owner._id == this._userId)) {
         this._delButton.classList.add('button_type_none');
       }
-      if (this._data.likes.some(elem => {
-        return this._checkOwner(elem);
-      })
-      ) {
-        this._likeButton.classList.add(this._config.buttonLikeActiveClass);
-      }
+      // if (this._data(this._data.owner)) {
+      //   this._delButton.classList.add('button_type_none');
+      // }
+      // if (this._data.likes.some(elem => {
+      //   return this._checkOwner(elem);
+      // })
+      // ) {
+      //   this._likeButton.classList.add(this._config.buttonLikeActiveClass);
+      // }
+      this.updateLikes(this._data.likes);
       this._setEventListeners(); //добавили прослушку в карточку
 
       return this._cardElement; //возвращаем элемент для вставки в DOM
