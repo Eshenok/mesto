@@ -19,9 +19,10 @@ export default class Card {
       return cardElement; //вернули для дальнейшего использования
     }
 
-    _handleDelButton () {
-      this._delButton.closest(this._cardElement).remove();
-    }
+  _handleDelButton () {
+    const cardSelector = this._config.cardItemSelector;
+    this._delButton.closest(cardSelector).remove();
+  }
 
     _setEventListeners () { //function добавления прослушки
       this._likeButton.addEventListener('click', () => {

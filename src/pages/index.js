@@ -25,10 +25,9 @@ function handleImageClick (item) { // обработчик клика по ка�
   imagePopup.open(item);
 }
 
-function handleDelClick (cardId, handleDelButton) {
+function handleDelClick (cardId, handleDel) {
   confirmPopup.open();
-  confirmPopup.putCardId(cardId, handleDelButton);
-  console.log(handleDelButton);
+  confirmPopup.putCardId(cardId, handleDel);
 }
 
 function handleProfileEditSubmit (values) {
@@ -102,7 +101,7 @@ function handleRemoveCard () {
   api.removeCard(confirmPopup.getCardId())
     .then(res => {
       if (res) {
-        confirmPopup.removeCard();
+
         confirmPopup.close();
       }
     })
