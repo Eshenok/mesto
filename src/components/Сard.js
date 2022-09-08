@@ -63,18 +63,11 @@ export default class Card {
       this._likeCounter.textContent = this._data.likes.length;
       this._delButton = this._cardElement.querySelector(this._config.buttonDelSelector); //Нашли кнопку удаления
       this._cardId = this._data['_id'];
+
       if (!(this._data.owner._id == this._userId)) {
         this._delButton.classList.add('button_type_none');
       }
-      // if (this._data(this._data.owner)) {
-      //   this._delButton.classList.add('button_type_none');
-      // }
-      // if (this._data.likes.some(elem => {
-      //   return this._checkOwner(elem);
-      // })
-      // ) {
-      //   this._likeButton.classList.add(this._config.buttonLikeActiveClass);
-      // }
+
       this.updateLikes(this._data.likes);
       this._setEventListeners(); //добавили прослушку в карточку
 

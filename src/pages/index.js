@@ -1,4 +1,4 @@
-import './index.css';
+// import './index.css';
 import FormValidate from '../components/FormValidator.js';
 import Card from "../components/Сard.js";
 import Section from "../components/Section.js";
@@ -15,19 +15,13 @@ function createCard ({name, link, likes, _id, owner}) { // Создание ка
   return card.generateCard(); // возвращаем для использования
 }
 
-// function checkOwner ({name, about}) {
-//   const ownerInfo = userInfo.getUserInfo();
-//   const anotherUserInfo = {name, about};
-//   return ((anotherUserInfo.name == ownerInfo.name) && (ownerInfo.occupation == anotherUserInfo.about));
-// }
-
 function handleImageClick (item) { // обработчик клика по карточке
   imagePopup.open(item);
 }
 
 function handleDelClick (cardId, handleDel) {
   confirmPopup.open();
-  confirmPopup.putCardId(cardId, handleDel);
+  confirmPopup.putCardConfig(cardId, handleDel);
 }
 
 function handleProfileEditSubmit (values) {
@@ -35,13 +29,13 @@ function handleProfileEditSubmit (values) {
   api.putProfileData(values.popup__input_type_name, values.popup__input_type_occupation)
     .then(res => {
       userInfo.setUserInfo(res.name, res.about);
+      profilePopup.close();
     })
     .catch(error => {
       console.log(error);
     })
     .finally(() => {
       profilePopup.renderLoading(false);
-      profilePopup.close();
     })
 }
 
@@ -51,13 +45,13 @@ function handleCardAddSubmit (values) {
   api.putNewCard(name, link)
     .then(res => {
       cardList.prependItem(createCard(res));
+      cardPopup.close();
     })
     .catch(error => {
       console.log(error);
     })
     .finally(() => {
       cardPopup.renderLoading(false);
-      cardPopup.close();
     })
 }
 
@@ -67,13 +61,13 @@ function handleProfileImageSubmit (values) {
   api.putNewAvatar(url)
     .then(res => {
       userInfo.setUserAvatar(res.avatar);
+      profileImagePopup.close();
     })
     .catch(error => {
       console.log(error);
     })
     .finally(() => {
       profileImagePopup.renderLoading(false);
-      profileImagePopup.close();
     })
 }
 
@@ -97,11 +91,11 @@ function handleLike (cardId) {
   }
 }
 
-function handleRemoveCard () {
-  api.removeCard(confirmPopup.getCardId())
+function handleRemoveCard (cardId, handleDelCard) {
+  api.removeCard(cardId)
     .then(res => {
       if (res) {
-
+        handleDelCard();
         confirmPopup.close();
       }
     })
@@ -187,9 +181,5 @@ cardOpenButton.addEventListener('click', () => { //Прослушка кнопк
 profileUserAvatar.addEventListener('click', () => {
   popupImageProfileValidate.switchStateForm();
   profileImagePopup.open();
-})
-
-confirmButton.addEventListener('click', () => {
-
 })
 
